@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         LaravelDoctrine\ORM\DoctrineServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         /*
          * Application Service Providers...
