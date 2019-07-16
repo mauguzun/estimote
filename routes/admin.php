@@ -1,14 +1,13 @@
 <?php
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], function (){
-    Route::get('/', function(){
-        return view('admin.reports.index');
-    })->name('index');
+    Route::get('login', ['uses' => 'AuthController@showLoginForm', 'as' => 'showLoginForm']);
+    Route::post('login', ['uses' => 'AuthController@postLogin', 'as' => 'postLogin']);
+    Route::get('logout', ['uses' => 'AuthController@logout', 'as' => 'logout']);
 
-    Route::get('/report_form', function(){
-        return view('admin.report_form');
-    })->name('report_form');
-
-    Route::get('/login_form', function(){
-        return view('admin.login_form');
-    })->name('login_form');
+    Route::group(['middleware' => ['auth:admin']], function() {
+        // Make adverts list as index url for admin
+        Route::get('/', function(){
+            return view('admin.reports.index');
+        })->name('index');
+    });
 });

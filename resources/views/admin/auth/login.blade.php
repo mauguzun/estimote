@@ -1,4 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    @include('admin.includes.styles')
+
+</head>
+<body>
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
@@ -12,48 +26,38 @@
                             <div class="form-group">
                                 <label class="label">Username</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Username"  id="username" required>
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="Username"
+                                           id="username"
+                                           required>
                                     <div class="input-group-append">
-                        <span class="input-group-text">
-                          <i class="mdi mdi-check-circle-outline"></i>
-                        </span>
+                                        <span class="input-group-text">
+                                          <i class="mdi mdi-check-circle-outline"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="label">Password</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" placeholder="*********"  id="pwd" required>
+                                    <input type="password"
+                                           class="form-control"
+                                           placeholder="*********"
+                                           id="pwd"
+                                           required>
                                     <div class="input-group-append">
-                        <span class="input-group-text">
-                          <i class="mdi mdi-check-circle-outline"></i>
-                        </span>
+                                    <span class="input-group-text">
+                                      <i class="mdi mdi-check-circle-outline"></i>
+                                    </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary submit-btn btn-block" id="login_button">Login</button>
                             </div>
-                            <div class="form-group d-flex justify-content-between">
-                                <div class="form-check form-check-flat mt-0">
-
-                                </div>
-                                <a href="#" class="text-small forgot-password text-black">Forgot Password</a>
-                            </div>
                         </form>
                     </div>
-                    <ul class="auth-footer">
-                        <li>
-                            <a href="#">Conditions</a>
-                        </li>
-                        <li>
-                            <a href="#">Help</a>
-                        </li>
-                        <li>
-                            <a href="#">Terms</a>
-                        </li>
-                    </ul>
-                    <p class="footer-text text-center">copyright © 2018 Bootstrapdash. All rights reserved.</p>
                 </div>
             </div>
         </div>
@@ -61,3 +65,8 @@
     </div>
     <!-- page-body-wrapper ends -->
 </div>
+
+@include('admin.includes.scripts')
+
+</body>
+</html>
