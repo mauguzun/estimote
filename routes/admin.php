@@ -1,7 +1,7 @@
 <?php
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], function (){
     Route::get('/', function(){
-        return view('admin.index');
+        return view('admin.reports.index');
     })->name('index');
 
     Route::get('/report_form', function(){
