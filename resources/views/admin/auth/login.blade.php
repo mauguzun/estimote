@@ -18,18 +18,18 @@
         <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
             <div class="row w-100">
                 <div class="col-lg-4 mx-auto">
-                    <div class="alert alert-danger" role="alert" id="login_error">
-                        Error:
-                    </div>
+
                     <div class="auto-form-wrapper">
-                        <form action="#">
+                        <form action="{{ url(route('admin::postLogin')) }}" method="post">
+                            @csrf
                             <div class="form-group">
-                                <label class="label">Username</label>
+                                <label class="label">Email</label>
                                 <div class="input-group">
                                     <input type="text"
                                            class="form-control"
                                            placeholder="Username"
                                            id="username"
+                                           name="email"
                                            required>
                                     <div class="input-group-append">
                                         <span class="input-group-text">
@@ -37,6 +37,11 @@
                                         </span>
                                     </div>
                                 </div>
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label class="label">Password</label>
@@ -45,6 +50,7 @@
                                            class="form-control"
                                            placeholder="*********"
                                            id="pwd"
+                                           name="password"
                                            required>
                                     <div class="input-group-append">
                                     <span class="input-group-text">
@@ -52,6 +58,11 @@
                                     </span>
                                     </div>
                                 </div>
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary submit-btn btn-block" id="login_button">Login</button>

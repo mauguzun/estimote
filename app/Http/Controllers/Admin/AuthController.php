@@ -52,7 +52,7 @@ class AuthController extends Controller
         return redirect()->back()
             ->withInput($request->only('email', 'remember'))
             ->withErrors([
-                'email' => 'Incorrect Email address or password',
+                'email' => 'Incorrect Email address',
             ]);
     }
 

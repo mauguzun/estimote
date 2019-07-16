@@ -37,8 +37,10 @@ class Authenticate extends Middleware
         }
 
         abort_if(
-            \Auth::guard('admin')->user() && \Gate::denies('access', \Route::getCurrentRoute()),
-            403, 'Access denied!'
+            \Auth::guard('admin')->user() &&
+            \Gate::denies('access', \Route::getCurrentRoute()) &&
+            !\Auth::guard('admin')->user()->isAdmin(),
+            403, 'Access denied! '
         );
 
         return $next($request);
