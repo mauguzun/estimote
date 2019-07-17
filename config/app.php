@@ -167,6 +167,7 @@ return [
          */
         LaravelDoctrine\ORM\DoctrineServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Sorskod\Larasponse\LarasponseServiceProvider::class,
 
         /*
          * Application Service Providers...
