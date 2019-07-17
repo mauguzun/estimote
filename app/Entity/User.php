@@ -75,7 +75,7 @@ class User implements Authenticatable
      * })
      */
     private $role;
-    
+
     /**
      * Get id
      *
@@ -271,7 +271,6 @@ class User implements Authenticatable
     {
         return 'rememberToken';
     }
-
 
     public function isAdmin()
     {

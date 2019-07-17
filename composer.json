@@ -23,7 +23,8 @@
         "laravel/homestead": "^9.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^7.5"
+        "phpunit/phpunit": "^7.5",
+        "sorskod/larasponse": "dev-L5"
     },
     "config": {
         "optimize-autoloader": true,
