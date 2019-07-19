@@ -67,6 +67,13 @@ class User implements Authenticatable
     private $rememberToken;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="password_reset_token", type="string", length=100, nullable=true)
+     */
+    private $passwordResetToken;
+
+    /**
      * @var \App\Entity\UserRole
      *
      * @ORM\ManyToOne(targetEntity="UserRole")
@@ -261,6 +268,30 @@ class User implements Authenticatable
     public function getAuthPassword()
     {
         return $this->getPassword();
+    }
+
+    /**
+     * Set passwordResetToken.
+     *
+     * @param string|null $passwordResetToken
+     *
+     * @return User
+     */
+    public function setPasswordResetToken($passwordResetToken = null)
+    {
+        $this->passwordResetToken = $passwordResetToken;
+
+        return $this;
+    }
+
+    /**
+     * Get passwordResetToken.
+     *
+     * @return string|null
+     */
+    public function getPasswordResetToken()
+    {
+        return $this->passwordResetToken;
     }
 
     /**
