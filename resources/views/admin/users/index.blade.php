@@ -51,13 +51,13 @@
                             </a>
                         @endcan
                         @can('access-content', 'user.user.passwordReset')
-                            <a class="dropdown-item"
+                            <a class="dropdown-item reset_password"
                                href="{{ url(route("admin::user.resetPassword", ['userId' => $user->getId()])) }}">
                                 <i class="mdi mdi-key"></i> Reset Password
                             </a>
                         @endcan
                         @can('access-content', 'user.delete')
-                            <a class="dropdown-item"
+                            <a class="dropdown-item delete_item"
                                href="{{url(route('admin::user.delete', ['userId' => $user->getId()]))}}">
                                 <i class="mdi mdi-trash-can"></i> Delete
                             </a>
@@ -68,4 +68,16 @@
         @endforeach
         </tbody>
     </table>
+@endsection
+
+@section('scripts')
+    <script>
+        $('.reset_password').click(function () {
+            if (confirm("Are you sure want to reset user's password?")) {
+                return true
+            }
+
+            return false;
+        })
+    </script>
 @endsection

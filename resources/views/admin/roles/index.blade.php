@@ -49,7 +49,7 @@
                             </a>
                         @endcan
                         @can('access-content', 'role.delete')
-                            <a class="dropdown-item"
+                            <a class="dropdown-item delete_item"
                                href="{{url(route('admin::role.delete', ['roleId' => $role->getId()]))}}">
                                 <i class="mdi mdi-trash-can"></i> Delete
                             </a>

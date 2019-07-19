@@ -5,4 +5,5 @@
 {{ Html::script('js/wickedpicker.js') }}
 {{ Html::script('https://code.jquery.com/ui/1.12.1/jquery-ui.js') }}
 {{ Html::script('js/main.js') }}
+{{ Html::script('js/admin/scripts.js') }}
 
