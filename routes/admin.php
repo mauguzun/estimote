@@ -3,6 +3,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], f
     Route::get('login', ['uses' => 'AuthController@showLoginForm', 'as' => 'showLoginForm']);
     Route::post('login', ['uses' => 'AuthController@postLogin', 'as' => 'postLogin']);
     Route::get('logout', ['uses' => 'AuthController@logout', 'as' => 'logout']);
+    Route::get('setPassword/{token}',
+        ['uses' => 'PasswordController@showPasswordResetForm', 'as' => 'setPassword']);
+    Route::post('password/reset/{userId}',
+        ['uses' => 'PasswordController@postPasswordReset', 'as' => 'passwordReset']);
 
     Route::group(['middleware' => ['auth:admin']], function() {
         // Make adverts list as index url for admin

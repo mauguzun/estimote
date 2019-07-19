@@ -18,7 +18,7 @@
         <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
             <div class="row w-100">
                 <div class="col-lg-4 mx-auto">
-
+                    @include('admin.includes._form_response_messages')
                     <div class="auto-form-wrapper">
                         <form action="{{ url(route('admin::postLogin')) }}" method="post">
                             @csrf
