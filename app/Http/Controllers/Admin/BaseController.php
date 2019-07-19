@@ -24,6 +24,4 @@ abstract class BaseController extends Controller
     {
         return;
     }
-
-    abstract protected function setBreadCrumbs($id = null): array;
 }
