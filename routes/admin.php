@@ -38,6 +38,27 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], f
                 ]
             );
         });
+
+        //User routes
+        Route::group(['prefix' => 'users', 'as' => 'user.'], function (){
+            Route::get('/', ['uses' => 'UsersController@index', 'as' => 'index', 'permissions' => ['user.view']]);
+            Route::get('/form/{userId?}',
+                ['uses' => 'UsersController@showForm', 'as' => 'showForm', 'permissions' => ['user.edit']]
+            );
+            Route::post('/{userId?}',
+                ['uses' => 'UsersController@postUser', 'as' => 'post', 'permissions' => ['user.edit']]
+            );
+            Route::get('/password-reset/{userId?}',
+                [
+                    'uses' => 'UsersController@resetPassword',
+                    'as' => 'resetPassword',
+                    'permissions' => ['user.passwordReset']
+                ]
+            );
+            Route::get('/delete/{userId}',
+                ['uses' => 'UsersController@deleteUser', 'as' => 'delete', 'permissions' => ['user.delete']]
+            );
+        });
     });
 
 
