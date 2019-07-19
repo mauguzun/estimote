@@ -6,6 +6,7 @@ use App\Entity\Traits\Hydratable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * User
@@ -20,7 +21,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
  */
 class User implements Authenticatable
 {
-    use Hydratable;
+    use Hydratable, Notifiable;
 
     /**
      * @var integer

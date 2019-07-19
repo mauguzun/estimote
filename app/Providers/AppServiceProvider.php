@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\UsersService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,6 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind('UsersService', function () {
+            return new UsersService();
+        });
+
         require_once __DIR__ . '/../Http/helpers.php';
     }
 
