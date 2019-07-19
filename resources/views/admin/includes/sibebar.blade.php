@@ -27,9 +27,11 @@
             </a>
             <div class="collapse" id="auth" style="">
                 <ul class="nav flex-column sub-menu">
+                    @can('access-content', 'role.view')
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Users Management</a>
+                        <a class="nav-link" href="{{ url(route('admin::user.index')) }}">Users Management</a>
                     </li>
+                    @endcan
                     @can('access-content', 'role.view')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url(route('admin::role.index')) }}">Roles Management</a>

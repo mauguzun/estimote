@@ -6,6 +6,7 @@ use App\Entity\Traits\Hydratable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * User
@@ -20,7 +21,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
  */
 class User implements Authenticatable
 {
-    use Hydratable;
+    use Hydratable, Notifiable;
 
     /**
      * @var integer
@@ -65,6 +66,13 @@ class User implements Authenticatable
      * @ORM\Column(name="remember_token", type="string", length=100, nullable=true)
      */
     private $rememberToken;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password_reset_token", type="string", length=100, nullable=true)
+     */
+    private $passwordResetToken;
 
     /**
      * @var \App\Entity\UserRole
@@ -261,6 +269,30 @@ class User implements Authenticatable
     public function getAuthPassword()
     {
         return $this->getPassword();
+    }
+
+    /**
+     * Set passwordResetToken.
+     *
+     * @param string|null $passwordResetToken
+     *
+     * @return User
+     */
+    public function setPasswordResetToken($passwordResetToken = null)
+    {
+        $this->passwordResetToken = $passwordResetToken;
+
+        return $this;
+    }
+
+    /**
+     * Get passwordResetToken.
+     *
+     * @return string|null
+     */
+    public function getPasswordResetToken()
+    {
+        return $this->passwordResetToken;
     }
 
     /**

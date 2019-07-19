@@ -15,14 +15,22 @@ class UserRepository extends EntityRepository
 {
     /**
      * @param string $email
-     * 
-     * @return null|User
+     * @return null|object|User
      */
     public function findByEmail(string $email)
     {
         return $this->findOneBy(['email' => $email]);
     }
-    
+
+    /**
+     * @param string $token
+     * @return null|object|User
+     */
+    public  function  findByPasswordToken(string $token)
+    {
+        return $this->findOneBy(['passwordResetToken' => $token]);
+    }
+
     /**
      * @param string $role
      * 

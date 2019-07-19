@@ -1,12 +1,12 @@
 @extends ('admin.base_layout')
 
 @section('title')
-    Roles
+    Users
 @endsection
 
 @section('toolbar')
     <div class="sort-wrapper">
-        <a href="{{ url(route('admin::role.showForm')) }}" class="btn btn-primary toolbar-item">New</a>
+        <a href="{{ url(route('admin::user.showForm')) }}" class="btn btn-primary toolbar-item">New</a>
     </div>
 @endsection
 
@@ -16,16 +16,24 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Description</th>
+            <th>Full name</th>
+            <th>Email</th>
+            <th>Role</th>
             <th>Manage</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($roles as $role)
+        @foreach($users as $user)
             <tr class="odd gradeX">
-                <td>{{ $role->getName() }}</td>
-                <td>{{ $role->getDescription() }}</td>
+                <td>{{ $user->getFullName() }}</td>
+                <td>{{ $user->getEmail() }}</td>
+                <td>
+                    @if ($user->getRole() != null)
+                        {{ $user->getRole()->getName() }} {{ $user->getRole()->getDescription() }}
+                    @else
+                        Role is not assigned to this user yet
+                    @endif
+                </td>
                 <td width="25%">
                     <button class="btn btn-warning icon-btn dropdown-toggle"
                             type="button" id="dropdownMenuIconButton1"
@@ -36,21 +44,21 @@
                          aria-labelledby="dropdownMenuIconButton1"
                          x-placement="bottom-start"
                          style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                        @can('access-content', 'role.edit')
+                        @can('access-content', 'user.edit')
                             <a class="dropdown-item"
-                               href="{{ url(route("admin::role.showForm", ['roleId' => $role->getId()])) }}">
+                               href="{{ url(route("admin::role.showForm", ['userId' => $user->getId()])) }}">
                                 <i class="mdi mdi-pencil-circle"></i> Edit
                             </a>
                         @endcan
-                        @can('access-content', 'role.permission.edit')
-                            <a class="dropdown-item"
-                               href="{{url(route('admin::role.edit.permissions', ['roleId' => $role->getId()]))}}">
-                                <i class="mdi mdi-pencil-circle"></i> Edit Permissions
+                        @can('access-content', 'user.user.passwordReset')
+                            <a class="dropdown-item reset_password"
+                               href="{{ url(route("admin::user.resetPassword", ['userId' => $user->getId()])) }}">
+                                <i class="mdi mdi-key"></i> Reset Password
                             </a>
                         @endcan
-                        @can('access-content', 'role.delete')
+                        @can('access-content', 'user.delete')
                             <a class="dropdown-item delete_item"
-                               href="{{url(route('admin::role.delete', ['roleId' => $role->getId()]))}}">
+                               href="{{url(route('admin::user.delete', ['userId' => $user->getId()]))}}">
                                 <i class="mdi mdi-trash-can"></i> Delete
                             </a>
                         @endcan
@@ -60,4 +68,16 @@
         @endforeach
         </tbody>
     </table>
+@endsection
+
+@section('scripts')
+    <script>
+        $('.reset_password').click(function () {
+            if (confirm("Are you sure want to reset user's password?")) {
+                return true
+            }
+
+            return false;
+        })
+    </script>
 @endsection

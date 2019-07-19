@@ -3,6 +3,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], f
     Route::get('login', ['uses' => 'AuthController@showLoginForm', 'as' => 'showLoginForm']);
     Route::post('login', ['uses' => 'AuthController@postLogin', 'as' => 'postLogin']);
     Route::get('logout', ['uses' => 'AuthController@logout', 'as' => 'logout']);
+    Route::get('setPassword/{token}',
+        ['uses' => 'PasswordController@showPasswordResetForm', 'as' => 'setPassword']);
+    Route::post('password/reset/{userId}',
+        ['uses' => 'PasswordController@postPasswordReset', 'as' => 'passwordReset']);
 
     Route::group(['middleware' => ['auth:admin']], function() {
         // Make adverts list as index url for admin
@@ -36,6 +40,27 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], f
                     'as' => 'post.permissions',
                     'permissions' => ['role.permission.edit']
                 ]
+            );
+        });
+
+        //User routes
+        Route::group(['prefix' => 'users', 'as' => 'user.'], function (){
+            Route::get('/', ['uses' => 'UsersController@index', 'as' => 'index', 'permissions' => ['user.view']]);
+            Route::get('/form/{userId?}',
+                ['uses' => 'UsersController@showForm', 'as' => 'showForm', 'permissions' => ['user.edit']]
+            );
+            Route::post('/{userId?}',
+                ['uses' => 'UsersController@postUser', 'as' => 'post', 'permissions' => ['user.edit']]
+            );
+            Route::get('/password-reset/{userId?}',
+                [
+                    'uses' => 'UsersController@resetPassword',
+                    'as' => 'resetPassword',
+                    'permissions' => ['user.passwordReset']
+                ]
+            );
+            Route::get('/delete/{userId}',
+                ['uses' => 'UsersController@deleteUser', 'as' => 'delete', 'permissions' => ['user.delete']]
             );
         });
     });
