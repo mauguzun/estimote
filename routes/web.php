@@ -23,9 +23,9 @@ Route::get('/admin/stands', function () {
     return view('admin.stands');
 });
 
-Route::get('/admin/aircrafts', function () {
-    return view('admin.aircrafts');
-});
+//Route::get('/admin/aircrafts', function () {
+//    return view('admin.aircrafts');
+//});
 
 Route::get('/admin/reports', function () {
     return view('admin.reports');
