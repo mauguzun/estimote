@@ -19,9 +19,9 @@ Route::get('/auth', function () {
     return view('auth.index');
 });
 
-Route::get('/admin/stands', function () {
-    return view('admin.stands');
-});
+//Route::get('/admin/stands', function () {
+//    return view('admin.stands');
+//});
 
 //Route::get('/admin/aircrafts', function () {
 //    return view('admin.aircrafts');

@@ -10,10 +10,11 @@
             @include('admin.includes._form_errors')
             @include('admin.includes._form_response_messages')
             {{ Form::open([
-                    'route'	=> $aircraft ? 	['admin::aircrafts.update',$aircraft->getId()]:['admin::aircrafts.store'],
+                    'url'	=> $aircraft ? 	['admin/aircrafts',$aircraft->getId()]:['admin/aircrafts'],
                     'method'	=>  	$aircraft ? 'put' : 'post',
                 ])
             }}
+
 
             <div class="form-group">
                 {{ Form::label('acReg', 'Ac Reg') }}
@@ -22,7 +23,7 @@
 
 
             <div class="form-group">
-                <a href="{{ url(route('admin::aircrafts')) }}" class="btn btn-default">Cancel</a>
+                <a href="{{ url('admin/aircrafts') }}" class="btn btn-default">Cancel</a>
                 <button type="SUBMIT" class="btn btn-success">Submit</button>
             </div>
             {{ Form::close() }}

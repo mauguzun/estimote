@@ -1,26 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vadimkrutov
- * Date: 08/12/2016
- * Time: 14:07
- */
 
 namespace App\Http\Controllers\Admin;
 
-use App\Entity\Aircraft;
 use App\Entity\Country;
 use App\Entity\Repository\UserRepository;
+use App\Entity\Stand;
 use App\Services\InfoService;
 use App\Services\UserService;
 use Doctrine\ORM\EntityNotFoundException;
 use Illuminate\Http\Request;
 use Sorskod\Larasponse\Larasponse;
 
-class AircraftsController extends BaseController
+
+class StandsController extends BaseController
 {
     private $infoService;
-    private $redirect = 'admin/aircrafts';
+    private $redirect = 'admin/stands';
 
     public function __construct(Larasponse $fractal, InfoService $infoService)
     {
@@ -31,8 +26,8 @@ class AircraftsController extends BaseController
     public function index()
     {
 
-        return view('admin.aircrafts.index', [
-            'aircrafts' => $this->getRepository()->findAll()
+        return view('admin.stands.index', [
+            'stands' => $this->getRepository()->findAll()
         ]);
     }
 
@@ -41,21 +36,21 @@ class AircraftsController extends BaseController
      */
     protected function getRepository()
     {
-        return \EntityManager::getRepository(Aircraft::class);
+        return \EntityManager::getRepository(Stand::class);
     }
 
     public function create()
     {
-        return view('admin.aircrafts.form', ['aircraft' => null]);
+        return view('admin.stands.form', ['stand' => null]);
     }
 
     public function edit($id)
     {
-        $aircraft = null;
-        if ($id && (!$aircraft = $this->getRepository()->find($id))) {
+        $item = null;
+        if ($id && (!$item = $this->getRepository()->find($id))) {
             throw new EntityNotFoundException(sprintf('User with id %s not found', $id));
         }
-        return view('admin.aircrafts.form', ['aircraft' => $aircraft]);
+        return view('admin.stands.form', ['stand' => $item]);
     }
 
 
@@ -71,7 +66,6 @@ class AircraftsController extends BaseController
         \Session::flash('success', 'Aircraft was successfully updated');
         \EntityManager::flush($aircraft);
         return redirect($this->redirect);
-
     }
 
     protected function getValidationRules($id = null): array
@@ -79,8 +73,9 @@ class AircraftsController extends BaseController
 
         return [
             'create' => [
-                'acReg' =>
-                    'required|min:3|unique:App\Entity\Aircraft,acReg,' . $id,
+                'name' => 'required|min:3',
+                'latitude' => 'required|min:3',
+                'longitude' => 'required|min:3',
             ]
         ];
     }
@@ -90,11 +85,11 @@ class AircraftsController extends BaseController
 
         $this->validate($request, $this->getValidationRules()['create']);
 
-        $aircraft = new Aircraft();
-        $aircraft->hydrate($request->all());
+        $item = new Stand();
+        $item->hydrate($request->all());
 
-        \Session::flash('success', 'Aircraft was successfully created');
-        \EntityManager::persist($aircraft);
+        \Session::flash('success', 'Stand was successfully created');
+        \EntityManager::persist($item);
         \EntityManager::flush();
 
         return redirect($this->redirect);
@@ -111,7 +106,7 @@ class AircraftsController extends BaseController
         \EntityManager::remove($user);
         \EntityManager::flush();
 
-        \Session::flash('success', 'Aircraft was successfully deleted');
+        \Session::flash('success', 'Stand was successfully deleted');
         return redirect()->back();
     }
 

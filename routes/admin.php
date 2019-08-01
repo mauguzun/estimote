@@ -43,11 +43,67 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], f
                 ]
             );
         });
-        Route::resource('aircrafts', 'AircraftsController', [
-            'names' => [
-                'index' => 'aircrafts',
-            ]
-        ]);
+//        Route::resource('aircrafts', 'AircraftsController', [
+//            'names' => [
+//                'index' => 'aircrafts',
+//            ]
+//        ]);
+//        Route::resource('stands', 'StandsController', [
+//
+//        ]);
+
+
+        $routes = [
+            ['controller' => 'StandsController', 'prefix' => 'stands', 'accesPrefix' => 'stand.'],
+            ['controller' => 'AircraftsController', 'prefix' => 'aircrafts', 'accesPrefix' => 'aircraft.'],
+        ];
+
+        foreach ($routes as $oneRoute) {
+            Route::group(['prefix' => $oneRoute['prefix'], 'as' => $oneRoute['accesPrefix']], function () use ($oneRoute) {
+                Route::get('/', [
+                    'uses' => $oneRoute['controller'] . '@index',
+                    'as' => 'index',
+                    'permissions' => [$oneRoute['accesPrefix'] . 'view']
+                ]);
+
+                Route::get('/create',
+                    [
+                        'uses' => $oneRoute['controller'] . '@create',
+                        'as' => 'create',
+                        'permissions' => [$oneRoute['accesPrefix'] . 'create']
+                    ]
+                );
+
+                Route::post('/',
+                    [
+                        'uses' => $oneRoute['controller'] . '@store',
+                        'as' => 'create',
+                        'permissions' => [$oneRoute['accesPrefix'] . 'create']
+                    ]
+                );
+                Route::get('{id?}/edit/',
+                    [
+                        'uses' => $oneRoute['controller'] . '@edit',
+                        'as' => 'edit',
+                        'permissions' => [$oneRoute['accesPrefix'] . 'edit']
+                    ]
+                );
+                Route::put('/{id?}',
+                    [
+                        'uses' => $oneRoute['controller'] . '@update',
+                        'as' => 'edit',
+                        'permissions' => [$oneRoute['accesPrefix'] . 'edit']
+                    ]
+                );
+
+                Route::delete('/{id?}', [
+                    'uses' => $oneRoute['controller'] . '@destroy',
+                    'as' => 'delete',
+                    'permissions' => [$oneRoute['accesPrefix'] . 'delete']
+
+                ]);
+            });
+        }
 
         //User routes
         Route::group(['prefix' => 'users', 'as' => 'user.'], function () {

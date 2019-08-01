@@ -8,13 +8,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ url('admin/aircrafts/') }}">
                 <i class="menu-icon typcn typcn-document-text"></i>
                 <span class="menu-title">Aircrafts</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ url('admin/stands/') }}">
                 <i class="menu-icon typcn typcn-document-text"></i>
                 <span class="menu-title">Stands</span>
             </a>

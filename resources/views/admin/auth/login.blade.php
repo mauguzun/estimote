@@ -30,6 +30,7 @@
                                            placeholder="Username"
                                            id="username"
                                            name="email"
+                                           value="admin@aslairlines.be"
                                            required>
                                     <div class="input-group-append">
                                         <span class="input-group-text">
@@ -51,6 +52,7 @@
                                            placeholder="*********"
                                            id="pwd"
                                            name="password"
+                                           value="aslairlines2018"
                                            required>
                                     <div class="input-group-append">
                                     <span class="input-group-text">

@@ -1,12 +1,12 @@
 @extends ('admin.base_layout')
 
 @section('title')
-    Aircrafts
+    Stands
 @endsection
 
 @section('toolbar')
     <div class="sort-wrapper">
-        <a href="{{ url('/admin/aircrafts/create') }}" class="btn btn-primary toolbar-item">New</a>
+        <a href="{{ url('/admin/stands/create') }}" class="btn btn-primary toolbar-item">New</a>
     </div>
 @endsection
 
@@ -16,15 +16,18 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Ac Reg</th>
-            <th>Manage</th>
+            <th>Name</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
 
         </tr>
         </thead>
         <tbody>
-        @foreach($aircrafts as $aircraft)
+        @foreach($stands  as $stand)
             <tr class="odd gradeX">
-                <td>{{ $aircraft->getAcReg() }}</td>
+                <td>{{ $stand->getName() }}</td>
+                <td>{{ $stand->getLongitude() }}</td>
+                <td>{{ $stand->getLatitude() }}</td>
                 <td width="25%">
                     <button class="btn btn-warning icon-btn dropdown-toggle"
                             type="button" id="dropdownMenuIconButton1"
@@ -36,13 +39,13 @@
                          x-placement="bottom-start"
                          style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
 
-                        <a class="dropdown-item"
-                           href="{{ url('admin/aircrafts/'.$aircraft->getId().'/edit')}}">
-                            <i class="mdi mdi-pencil-circle"></i> Edit
-                        </a>
+                            <a class="dropdown-item"
+                               href="{{ url('admin/stands/'.$stand->getId().'/edit')}}">
+                                <i class="mdi mdi-pencil-circle"></i> Edit
+                            </a>
 
 
-                        {{Form::open(['url'=>['admin/aircrafts', $aircraft->getId()], 'method'=>'delete'])}}
+                        {{Form::open(['url'=>['admin/stands', $stand->getId()], 'method'=>'delete'])}}
 
 
 
@@ -51,6 +54,7 @@
 
 
                         {{Form::close()}}
+
 
 
                     </div>
