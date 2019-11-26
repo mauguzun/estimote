@@ -26,27 +26,6 @@ Thumbs.db
 .vagrant
 
 
-# Application Based Files
-/bootstrap/compiled.php
-/vendor
-/storage/proxies
-/storage/framework/
-/storage/fonts/*
-
-# Vendor files
-/public/vendor
-
-#Capistrano
-/config/myconfig.rb
-/log/capistrano.log
-
-
-#Uploads
-/public/uploads/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
