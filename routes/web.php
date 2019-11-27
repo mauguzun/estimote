@@ -20,6 +20,7 @@ Route::get('/auth', function () {
     return view('auth.index');
 });
 
-/*Route::post('api/beacon', 'api\BeaconController@store')->name('beacon.store');
-Route::get('api/beacon', 'api\BeaconController@index')->name('beacon');*/
+
+Route::resource('fake','FakeController');
+
 
