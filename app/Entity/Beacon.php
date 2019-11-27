@@ -203,7 +203,7 @@ class Beacon
      */
     private $ts;
    /**
-     * @ORM\Column(name="lat", type="string", nullable=false)
+    * @ORM\Column(name="lat", type="float", length=20, precision=10 ,nullable=false)
      */
     private $lat;
 

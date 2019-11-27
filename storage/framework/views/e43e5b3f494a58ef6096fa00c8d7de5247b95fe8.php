@@ -17,6 +17,15 @@
                 </a>
             </li>
         <?php endif; ?>
+
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('access-content', 'apron.view')): ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo e(url('admin/aprons/')); ?>">
+                    <i class="menu-icon typcn typcn-document-text"></i>
+                    <span class="menu-title">Aprons</span>
+                </a>
+            </li>
+        <?php endif; ?>
         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('access-content', 'stand.view')): ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo e(url('admin/stands/')); ?>">

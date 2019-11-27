@@ -34,29 +34,7 @@ class Aircraft
      */
     private $acReg;
 
-    /**
-     * @return \App\Entity\Raport
-     */
-    public function getRaport():Raport
-    {
-        return $this->raport;
-    }
 
-    /**
-     * @param mixed $raport
-     * @return Aircraft
-     */
-    public function setRaport($raport)
-    {
-        $this->raport = $raport;
-        return $this;
-    }
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Raport",inversedBy="tail")
-     *
-     **/
-    private $raport;
 
     /**
      * @return int

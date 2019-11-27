@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Entity\Apron;
 use App\Entity\Country;
 use App\Entity\Raport;
 use App\Entity\Repository\UserRepository;
@@ -13,10 +14,10 @@ use Illuminate\Http\Request;
 use Sorskod\Larasponse\Larasponse;
 
 
-class StandsController extends BaseController
+class ApronsController extends BaseController
 {
     private $infoService;
-    private $redirect = 'admin/stands';
+    private $redirect = 'admin/aprons';
 
     public function __construct(Larasponse $fractal, InfoService $infoService)
     {
@@ -27,7 +28,7 @@ class StandsController extends BaseController
     public function index()
     {
 
-        return view('admin.stands.index', [
+        return view('admin.aprons.index', [
             'stands' => $this->getRepository()->findAll()
         ]);
     }
@@ -37,15 +38,12 @@ class StandsController extends BaseController
      */
     protected function getRepository()
     {
-        return \EntityManager::getRepository(Stand::class);
+        return \EntityManager::getRepository(Apron::class);
     }
 
     public function create()
     {
-        return view('admin.stands.form', [
-            'stand' => null,
-            'aprons' => $this->infoService->get(InfoService::DATA_TYPE_FORM_APRONS),
-        ]);
+        return view('admin.aprons.form', ['stand' => null]);
     }
 
     public function edit($id)
@@ -54,18 +52,12 @@ class StandsController extends BaseController
         if ($id && (!$item = $this->getRepository()->find($id))) {
             throw new EntityNotFoundException(sprintf('User with id %s not found', $id));
         }
-
-        return view('admin.stands.form', [
-            'stand' => $item,
-            'aprons' => $this->infoService->get(InfoService::DATA_TYPE_FORM_APRONS),
-        ]);
+        return view('admin.aprons.form', ['stand' => $item]);
     }
 
 
     public function update(Request $request, $id)
     {
-
-
         $aircraft = null;
         if ($id && (!$aircraft = $this->getRepository()->find($id))) {
             throw new EntityNotFoundException(sprintf('User with id %s not found', $id));
@@ -73,8 +65,7 @@ class StandsController extends BaseController
 
         $this->validate($request, $this->getValidationRules($id)['create']);
         $aircraft->hydrate($request->all());
-
-        \Session::flash('success', 'Stand was successfully updated');
+        \Session::flash('success', 'Aircraft was successfully updated');
         \EntityManager::flush($aircraft);
         return redirect($this->redirect);
     }
@@ -84,29 +75,26 @@ class StandsController extends BaseController
 
         return [
             'create' => [
-                'name' => 'required|min:1',
-                'latitude' => 'required|min:3',
-                'longitude' => 'required|min:3',
+                'title' => 'required|min:1',
+
             ]
         ];
     }
-
     public function show($id)
     {
         return redirect($this->redirect);
     }
-
     public function store(Request $request)
     {
 
         $this->validate($request, $this->getValidationRules()['create']);
 
-        $item = new Stand();
+        $item = new Apron();
         $item->hydrate($request->all());
 
-        dd($request->all());
 
-        \Session::flash('success', 'Stand was successfully created');
+
+        \Session::flash('success', 'Apron was successfully created');
         \EntityManager::persist($item);
         \EntityManager::flush();
 
@@ -118,10 +106,10 @@ class StandsController extends BaseController
         $item = $this->getRepository()->find($id);
 
         if (!$item) {
-            throw new EntityNotFoundException(sprintf('Stand with id %s not found', $id));
+            throw new EntityNotFoundException(sprintf('Apron with id %s not found', $id));
         }
-        if (\EntityManager::getRepository(Raport::class)->findOneBy(['stand' => $item])) {
-            \Session::flash('danger', 'Pls first delete all raports');
+        if(\EntityManager::getRepository(Stand::class)->findOneBy(['apron_id'=>$id])) {
+            \Session::flash('danger', 'Pls first delete all stands');
             return redirect()->back();
         }
 

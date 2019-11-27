@@ -11,6 +11,7 @@ namespace App\Services;
 
 use App\Entity\Aircraft;
 use App\Entity\Stand;
+use App\Entity\Apron;
 use App\Entity\Status;
 use App\Entity\UserRole;
 use App\Http\Controllers\Admin\StandsController;
@@ -22,6 +23,7 @@ class InfoService
     const DATA_TYPE_FORM_AIRCRAFTS = 'aircrafts';
     const DATA_TYPE_FORM_STANDS = 'stands';
     const DATA_TYPE_FORM_STATUS = 'status';
+    const DATA_TYPE_FORM_APRONS = 'aprons';
 
     /**
      * @param string $dataType
@@ -44,6 +46,8 @@ class InfoService
                 return $this->getArrayFromObject(Stand::class, 'getId', 'getName');
             case static::DATA_TYPE_FORM_STATUS:
                 return $this->getArrayFromObject(Status::class, 'getId', 'getStatus');
+            case static::DATA_TYPE_FORM_APRONS:
+                return $this->getArrayFromObject(Apron::class, 'getId', 'getTitle');
 
 
         }

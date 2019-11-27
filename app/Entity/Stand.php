@@ -15,7 +15,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use phpDocumentor\Reflection\Types\This;
 
-use App\Entity\Raport;
+use App\Entity\Apron;
 
 
 /**
@@ -25,6 +25,7 @@ use App\Entity\Raport;
  */
 class Stand
 {
+
     use Hydratable, Notifiable;
     /**
      * @var integer
@@ -50,31 +51,34 @@ class Stand
      */
     private $latitude;
 
-    /**
-     * @return \App\Entity\Raport
-     */
-    public function getRaport():Raport
-    {
-        return $this->raport;
-    }
 
     /**
-     * @param mixed $raport
-     * @return Stand
+     * @ORM\ManyToOne(targetEntity="Apron",inversedBy="stands")
+     * @ORM\JoinColumn(name="arpon_id" ,referencedColumnName="id")
+     **/
+    private  $apron;
+
+    /**
+     * @return mixed
      */
-    public function setRaport($raport)
+    public function getApron()
     {
-        $this->raport = $raport;
+        return $this->apron;
+    }
+
+
+    /**
+     * @param $apron
+     * @return $this
+     */
+    public function setApron($apron)
+    {
+        $this->apron = $apron;
         return $this;
     }
 
 
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Raport",inversedBy="stand")
-     *
-     **/
-    private $raport;
 
     /**
      * @return int

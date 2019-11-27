@@ -17,6 +17,15 @@
                 </a>
             </li>
         @endcan
+
+        @can('access-content', 'apron.view')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('admin/aprons/') }}">
+                    <i class="menu-icon typcn typcn-document-text"></i>
+                    <span class="menu-title">Aprons</span>
+                </a>
+            </li>
+        @endcan
         @can('access-content', 'stand.view')
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('admin/stands/') }}">

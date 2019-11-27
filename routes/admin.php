@@ -45,6 +45,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], f
 
         $routes = [
             ['controller' => 'StandsController', 'prefix' => 'stands', 'accesPrefix' => 'stand.'],
+            ['controller' => 'ApronsController', 'prefix' => 'aprons', 'accesPrefix' => 'apron.'],
             ['controller' => 'AircraftsController', 'prefix' => 'aircrafts', 'accesPrefix' => 'aircraft.'],
             ['controller' => 'StatusesController', 'prefix' => 'statuses', 'accesPrefix' => 'status.'],
             ['controller' => 'RaportsController', 'prefix' => 'raports', 'accesPrefix' => 'raport.'],

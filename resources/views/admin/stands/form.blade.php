@@ -29,6 +29,17 @@
             </div>
 
 
+            <div class="form-group row">
+                <label for="exampleInputPassword2"
+                       class="col-sm-3 col-form-label">   {{ Form::label('apron', 'Apron') }}</label>
+                <div class="col-sm-9">
+                    {{ Form::select('apron',array_merge($aprons,[''=>'']) ,
+                            $stand && $stand->getApron() ? $stand->getApron()->getId() : '',
+                            ['class' => 'form-control selectpicker' ,
+                            'required'=>'required']
+                        )
+                    }}</div>
+            </div>
 
             <div class="form-group">
                 <a href="{{ url('admin/stands') }}" class="btn btn-default">Cancel</a>

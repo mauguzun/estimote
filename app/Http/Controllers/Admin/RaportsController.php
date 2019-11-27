@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use App\Entity\Aircraft;
 use App\Entity\Country;
 use App\Entity\Raport;
+use App\Entity\Report;
 use App\Entity\Repository\UserRepository;
 use App\Entity\Stand;
 use App\Entity\Status;
@@ -51,7 +52,7 @@ class RaportsController extends BaseController
      */
     protected function getRepository()
     {
-        return \EntityManager::getRepository(Raport::class);
+        return \EntityManager::getRepository(Report::class);
     }
 
     public function create()

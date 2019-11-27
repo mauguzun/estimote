@@ -18,15 +18,20 @@ use phpDocumentor\Reflection\Types\This;
 use App\Entity\Raport;
 use Symfony\Component\Console\Descriptor\ApplicationDescription;
 
-
 /**
  * Status
  * @ORM\Entity
- * @ORM\Table(name="statuses")
+ * @ORM\Table(name="aprons")
  */
-class Status
+class Apron
 {
     use Hydratable, Notifiable;
+
+    public function __construct()
+    {
+        $this->stands = new ArrayCollection();
+    }
+
     /**
      * @var integer
      *
@@ -39,12 +44,13 @@ class Status
      * @var string
      * @ORM\Column(type="string" , nullable=false )
      */
-    private $status;
+    private $title;
+
     /**
-     * @var string
-     * @ORM\Column(type="string"  )
-     */
-    private $description;
+     * @ORM\OneToMany(targetEntity="Stand" , mappedBy="arpon")
+     **/
+    protected $stands;
+
 
     /**
      * @return int
@@ -54,50 +60,42 @@ class Status
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     * @return $this
-     */
-    public function setId(int $id)
-    {
-        $this->id = $id;
-        return $this;
-    }
 
     /**
      * @return string
      */
-    public function getStatus(): string
+    public function getTitle(): string
     {
-        return $this->status;
+        return $this->title;
     }
 
     /**
-     * @param string $status
-     * @return $this
+     * @param string $title
+     * @return Apron
      */
-    public function setStatus(string $status)
+    public function setTitle(string $title): Apron
     {
-        $this->status = $status;
+        $this->title = $title;
         return $this;
     }
 
     /**
-     * @return string
+     * @return ArrayCollection
      */
-    public function getDescription(): string
+    public function getStands()
     {
-        return $this->description;
+        return $this->stands;
     }
 
     /**
-     * @param string $description
+     * @param Stand $stands
      * @return $this
      */
-    public function setDescription(string $description)
+    public function setStands(Stand $stands)
     {
-        $this->description = $description;
+        $this->stands->add($stands);
         return $this;
     }
+
 
 }
