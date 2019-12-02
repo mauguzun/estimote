@@ -50,7 +50,7 @@ class Report
     private $stand;
 
     /**
-     * @ORM\Column(name="integer" )
+     * @ORM\Column(name="ts" )
      */
     private $ts;
 
@@ -66,5 +66,5 @@ class Report
     /**
      * @ORM\Column(type="integer" )
      */
-    private $lead;
+    private $leadTime;
 }

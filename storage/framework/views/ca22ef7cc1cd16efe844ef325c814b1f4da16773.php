@@ -21,14 +21,14 @@
 
                 <?php echo e(Form::label('start', 'start')); ?>
 
-                <?php echo e(Form::text('start',  '2019-12-01', ["class" => "form-control"])); ?>
+                <?php echo e(Form::text('start',  '2018-12-01', ["class" => "form-control"])); ?>
 
 
             </div>
             <div class="form-group">
                 <?php echo e(Form::label('stop', 'stop')); ?>
 
-                <?php echo e(Form::text('stop',  '2019-12-02', ["class" => "form-control"])); ?>
+                <?php echo e(Form::text('stop',  '2022-12-02', ["class" => "form-control"])); ?>
 
 
             </div>
@@ -46,7 +46,7 @@
 
 
             <div class="form-group">
-                <a href="<?php echo e(url('admin/raports')); ?>" class="btn btn-default">Cancel</a>
+                <a href="<?php echo e(url('admin/reports')); ?>" class="btn btn-default">Cancel</a>
                 <button type="SUBMIT" class="btn btn-success">Submit</button>
             </div>
             <?php echo e(Form::close()); ?>
@@ -59,4 +59,4 @@
 
 
 
-<?php echo $__env->make('admin.base_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/vagrant/code/resources/views/admin/raports/form.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('admin.base_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/vagrant/code/resources/views/admin/reports/form.blade.php ENDPATH**/ ?>

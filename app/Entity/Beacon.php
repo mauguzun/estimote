@@ -14,17 +14,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use phpDocumentor\Reflection\Types\This;
-
-
-
+use App\Entity\Repository\BeaconRepository;
 
 
 
 /**
- * Raport
- * @ORM\Entity
+ * Beacon
  * @ORM\Table(name="beacon")
+ * @ORM\Entity(repositoryClass="App\Entity\Repository\BeaconRepository")
  */
 class Beacon
 {

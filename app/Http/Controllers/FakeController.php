@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Entity\Stand;
+
+use App\Entity\Beacon;
+use App\Entity\Repository\BeaconRepository;
 
 
 class FakeController extends Controller
@@ -13,11 +15,36 @@ class FakeController extends Controller
      */
     public function index()
     {
-        //
-        $time =  \DateTime::createFromFormat('Y-m-d H:i:s',"2019-11-25 00:00:00");
+        $max = new \DateTime("12/01/2020 12:24:03");
+        $min = new \DateTime("00/00/2019 12:24:03");
+
+        $rows = $this->getRepository()->createQueryBuilder('u')
+            ->select(
+                'MAX(u.added) AS stop,
+                MIN(u.added) as start, 
+                u.lat as lat,
+                u.long as long')
+            ->where('u.speed = 0')
+            ->andWhere('u.added < :max')
+            ->andWhere('u.added > :min')
+            ->setParameter('max', $max)
+            ->setParameter('min', $min)
+            ->groupBy('u.lat,u.long')
+
+            ->getQuery()->getResult();
 
 
-        dd($time);
+        dd($rows);
+        foreach ($rows as $row) {
+
+        }
+        //class ,lat long , start , stop ,diff
+
+    }
+
+    protected function getRepository()
+    {
+        return \EntityManager::getRepository(Beacon::class);
     }
 
     /**
@@ -28,31 +55,24 @@ class FakeController extends Controller
     public function create()
     {
 
-        $stands =  $this->getRepository()->findAll();
+        $stands = $this->getRepository()->findAll();
 
         $data = [];
-        foreach ($stands as $stand){
+        foreach ($stands as $stand) {
             $data[] = [
-                'id'=>$stand->getId(),
-                'lat'=>$stand->getLatitude(),
-                'lng'=>$stand->getLongitude(),
-                'title'=>$stand->getName()
+                'id' => $stand->getId(),
+                'lat' => $stand->getLatitude(),
+                'lng' => $stand->getLongitude(),
+                'title' => $stand->getName()
             ];
         };
         return view('fake', ['stands' => json_encode($data)]);
     }
 
-
-
-    protected function getRepository()
-    {
-        return \EntityManager::getRepository(Stand::class);
-    }
-
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -63,7 +83,7 @@ class FakeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -74,7 +94,7 @@ class FakeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -85,8 +105,8 @@ class FakeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -97,7 +117,7 @@ class FakeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
