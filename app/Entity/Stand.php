@@ -22,6 +22,7 @@ use App\Entity\Apron;
  * Stand
  * @ORM\Entity
  * @ORM\Table(name="stands")
+ * @ORM\Entity(repositoryClass="App\Entity\Repository\StandRepository")
  */
 class Stand
 {
@@ -42,12 +43,12 @@ class Stand
     private $name;
     /**
      * @var string
-     * @ORM\Column(type="string"  )
+     * @ORM\Column(type="decimal", scale=4 )
      */
     private $longitude;
     /**
      * @var string
-     * @ORM\Column(type="string"  )
+     * @ORM\Column( type="decimal",  scale=4 )
      */
     private $latitude;
 

@@ -200,12 +200,12 @@ class Beacon
      */
     private $ts;
    /**
-    * @ORM\Column(name="lat", type="float", length=20, precision=10 ,nullable=false)
+    * @ORM\Column(name="lattitude",type="decimal", scale=4 )
      */
     private $lat;
 
     /**
-     * @ORM\Column(name="longitude", type="float", length=20, precision=10 ,nullable=false)
+     * @ORM\Column(name="longitude", type="decimal", scale=4 )
      */
     private $long;
 

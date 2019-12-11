@@ -6,7 +6,7 @@
 <br>
 <br>
 <p id="timer"/>Timing</p> <br>
-<p id="xx"/>Timing</p> <br>
+
 <input type="range" id="dates" min="0" max="<?=  count(json_decode($steps)); ?>" style="width: 100%"/>
 
 
@@ -35,6 +35,7 @@
         });
     });
     let steps = JSON.parse(<?php echo json_encode($steps) ?>);
+    console.log(steps)
 
     var flightPath = new google.maps.Polyline({
         path: steps,
@@ -69,7 +70,6 @@
 
         let item = steps[parseInt(e.target.value)];
         document.getElementById('timer').innerHTML = item.added.date;
-        document.getElementById('xx').innerHTML = e.target.value;
         if(car){
             car.setMap(null);
         }

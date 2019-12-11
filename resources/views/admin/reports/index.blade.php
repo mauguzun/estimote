@@ -1,7 +1,7 @@
 @extends ('admin.base_layout')
 
 @section('title')
-    Raports
+    Reports
 @endsection
 
 @section('toolbar')
@@ -26,13 +26,19 @@
         <tbody>
         @foreach($items  as $item)
             <tr class="odd gradeX">
-                <td><?= date('d-m-Y h:i', strtotime( $item['start'])) ?> </td>
+                <td><?= date('d-m-Y h:i', strtotime($item['start'])) ?> </td>
                 <td><?= $item['lat']?></td>
                 <td><?= $item['lng']?></td>
-                <td> in progr </td>
-                <td> in progr</td>
-                <td><?= date_diff(date_create($item['stop']),date_create($item['start']) )->format('%i') ?></td>
-
+                <td>
+                    <? if($item['name'] ):?>
+                    <a target="_blank" href="{{ url('admin/stands/'.$item['id'].'/edit' ) }}"><?= $item['name']?></a>
+                    <? endif; ?>
+                </td>
+                <td> in progrress </td>
+                <td><?=
+                  ( strtotime($item['stop'])- strtotime($item['start'])) / 60   ?>
+                     min
+                </td>
 
 
             </tr>

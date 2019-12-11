@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Entity\Apron;
 use App\Entity\Country;
 use App\Entity\Raport;
-use App\Entity\Repository\UserRepository;
+use App\Entity\Repository\StandRepository;
 use App\Entity\Stand;
 use App\Services\InfoService;
 use App\Services\UserService;
@@ -34,7 +34,7 @@ class ApronsController extends BaseController
     }
 
     /**
-     * @return \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository|UserRepository
+     * @return \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository|StandRepository
      */
     protected function getRepository()
     {
@@ -80,10 +80,12 @@ class ApronsController extends BaseController
             ]
         ];
     }
+
     public function show($id)
     {
         return redirect($this->redirect);
     }
+
     public function store(Request $request)
     {
 
@@ -91,7 +93,6 @@ class ApronsController extends BaseController
 
         $item = new Apron();
         $item->hydrate($request->all());
-
 
 
         \Session::flash('success', 'Apron was successfully created');
@@ -103,13 +104,16 @@ class ApronsController extends BaseController
 
     public function destroy($id)
     {
+
+
         $item = $this->getRepository()->find($id);
 
-        if (!$item) {
-            throw new EntityNotFoundException(sprintf('Apron with id %s not found', $id));
+        if (!$item ) {
+           // throw new EntityNotFoundException(sprintf('Apron with id %s not found', $id));
+            \Session::flash('danger', 'Item not exist');
         }
-        if(\EntityManager::getRepository(Stand::class)->findOneBy(['apron_id'=>$id])) {
-            \Session::flash('danger', 'Pls first delete all stands');
+        else if (\EntityManager::getRepository(Stand::class)->findByApron($item)) {
+            \Session::flash('danger', 'Pls first delete all stands based with apron ');
             return redirect()->back();
         }
 

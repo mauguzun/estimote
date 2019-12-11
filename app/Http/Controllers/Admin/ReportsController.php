@@ -16,7 +16,7 @@ use Sorskod\Larasponse\Larasponse;
 class ReportsController extends BaseController
 {
     private $infoService;
-    private $redirect = 'admin/resports';
+    private $redirect = 'admin/report';
 
 
     public function __construct(Larasponse $fractal, InfoService $infoService)
@@ -41,8 +41,13 @@ class ReportsController extends BaseController
 
 
             $reportRows = $this->getRepository()->reportQuery($start, $stop, (int)$_GET['ts']);
-            $steps = $this->getRepository()->steps($start, $stop, (int)$_GET['ts']);
 
+
+            $step =  $this->getRepository()->steps($start, $stop, (int)$_GET['ts']);
+
+
+
+         /*   dd($steps);*/
 
             $stands = \EntityManager::getRepository(Stand::class)->findAll();
             $data = [];
@@ -54,10 +59,9 @@ class ReportsController extends BaseController
                     'title' => $stand->getName()
                 ];
             };
-
             return view('admin.reports.index', [
                 'items' => $reportRows,
-                'steps' => json_encode($steps),
+                'steps' => json_encode($step),
                 'points' => json_encode($reportRows),
                 'stands' => json_encode($data)
             ]);

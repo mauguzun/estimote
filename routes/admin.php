@@ -11,7 +11,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], f
 
     Route::group(['middleware' => ['auth:admin']], function () {
         // Make adverts list as index url for admin
-        Route::get('/', ['uses' => 'RaportsController@index'])->name('index');
+        Route::get('/', ['uses' => 'ReportsController@index'])->name('index');
 
         //Roles routes
         Route::group(['prefix' => 'roles', 'as' => 'role.'], function () {

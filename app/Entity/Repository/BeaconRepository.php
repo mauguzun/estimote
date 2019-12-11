@@ -9,6 +9,7 @@
 namespace App\Entity\Repository;
 
 use App\Entity\Beacon;
+use App\Entity\Stand;
 use Doctrine\ORM\EntityRepository;
 
 class BeaconRepository extends EntityRepository
@@ -21,12 +22,16 @@ class BeaconRepository extends EntityRepository
      * @return mixed
      */
     public  function reportQuery(\DateTime $start,\DateTime $stop ,int $ts){
-        return   $this->createQueryBuilder('u')
+
+        $d=    $this->createQueryBuilder('u')
             ->select(
                 'MAX(u.added) AS stop,
                 MIN(u.added) as start, 
                 u.lat as lat,
-                u.long as lng')
+                u.long as lng,
+                s.name as name,
+                s.id as id 
+                ')
             ->where('u.speed = 0')
             ->andWhere('u.ts = :ts')
             ->setParameter('ts',$ts)
@@ -34,8 +39,12 @@ class BeaconRepository extends EntityRepository
             ->andWhere('u.added > :start')
             ->setParameter('start', $start)
             ->setParameter('stop', $stop)
-            ->groupBy('u.lat,u.long')
+            ->leftJoin('App\Entity\Stand', 's',
+                \Doctrine\ORM\Query\Expr\Join::WITH, 'u.lat = s.latitude and u.long = s.longitude')
+
+            ->groupBy('u.lat,u.long,s.name,s.id')
             ->getQuery()->getResult();
+       return $d;
     }
 
     /**
@@ -45,7 +54,7 @@ class BeaconRepository extends EntityRepository
      * @return mixed
      */
     public  function steps(\DateTime $start,\DateTime $stop ,int $ts){
-        return   $this->createQueryBuilder('u')
+        $step=    $this->createQueryBuilder('u')
             ->select('u.lat as lat ,u.long as lng ,u.speed as speed ,u.added as added ')
             ->where('u.ts = :ts')
             ->setParameter('ts',$ts)
@@ -53,6 +62,14 @@ class BeaconRepository extends EntityRepository
             ->andWhere('u.added > :start')
             ->setParameter('start', $start)
             ->setParameter('stop', $stop)
-            ->getQuery()->getArrayResult();
+            ->getQuery()->getResult();
+
+
+        foreach ($step as &$value){
+            $value['lat'] = (float)$value['lat'];
+            $value['lng'] =(float) $value['lng'];
+        }
+        return $step;
+
     }
 }

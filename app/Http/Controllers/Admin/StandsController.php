@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Entity\Country;
 use App\Entity\Raport;
-use App\Entity\Repository\UserRepository;
+use App\Entity\Report;
+use App\Entity\Repository\StandRepository;
 use App\Entity\Stand;
 use App\Services\InfoService;
 use App\Services\UserService;
@@ -33,7 +34,7 @@ class StandsController extends BaseController
     }
 
     /**
-     * @return \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository|UserRepository
+     * @return \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository|StandRepository
      */
     protected function getRepository()
     {
@@ -72,6 +73,10 @@ class StandsController extends BaseController
         }
 
         $this->validate($request, $this->getValidationRules($id)['create']);
+        if (!$request->get('apron')) {
+            $request->request->remove('apron');
+        }
+
         $aircraft->hydrate($request->all());
 
         \Session::flash('success', 'Stand was successfully updated');
@@ -102,9 +107,12 @@ class StandsController extends BaseController
         $this->validate($request, $this->getValidationRules()['create']);
 
         $item = new Stand();
+        if (!$request->get('apron')) {
+            $request->request->remove('apron');
+        }
+
         $item->hydrate($request->all());
 
-        dd($request->all());
 
         \Session::flash('success', 'Stand was successfully created');
         \EntityManager::persist($item);
@@ -120,8 +128,8 @@ class StandsController extends BaseController
         if (!$item) {
             throw new EntityNotFoundException(sprintf('Stand with id %s not found', $id));
         }
-        if (\EntityManager::getRepository(Raport::class)->findOneBy(['stand' => $item])) {
-            \Session::flash('danger', 'Pls first delete all raports');
+        if (\EntityManager::getRepository(Report::class)->findOneBy(['stand' => $item])) {
+            \Session::flash('danger', 'Pls first delete all reports with stands');
             return redirect()->back();
         }
 

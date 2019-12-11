@@ -34,14 +34,14 @@
                          aria-labelledby="dropdownMenuIconButton1"
                          x-placement="bottom-start"
                          style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('access-content', 'stand.edit')): ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('access-content', 'aprons.edit')): ?>
                             <a class="dropdown-item"
                                href="<?php echo e(url('admin/aprons/'.$stand->getId().'/edit')); ?>">
                                 <i class="mdi mdi-pencil-circle"></i> Edit
                             </a>
                         <?php endif; ?>
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('access-content', 'aprons.delete')): ?>
-                            <?php echo e(Form::open(['url'=>['admin/stands', $stand->getId()], 'method'=>'delete'])); ?>
+                            <?php echo e(Form::open(['url'=>['admin/aprons', $stand->getId()], 'method'=>'delete'])); ?>
 
                             <button class="dropdown-item delete_item"><i class="mdi mdi-trash-can"></i> Delete</button>
                             <?php echo e(Form::close()); ?>

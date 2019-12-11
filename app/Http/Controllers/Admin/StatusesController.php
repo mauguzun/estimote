@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Entity\Country;
-use App\Entity\Repository\UserRepository;
+use App\Entity\Repository\StandRepository;
 use App\Entity\Status;
 use App\Services\InfoService;
 use App\Services\UserService;
@@ -33,7 +33,7 @@ class StatusesController  extends BaseController
     }
 
     /**
-     * @return \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository|UserRepository
+     * @return \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository|StandRepository
      */
     protected function getRepository()
     {

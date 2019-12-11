@@ -36,14 +36,14 @@
                          aria-labelledby="dropdownMenuIconButton1"
                          x-placement="bottom-start"
                          style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-                        @can('access-content', 'stand.edit')
+                        @can('access-content', 'aprons.edit')
                             <a class="dropdown-item"
                                href="{{ url('admin/aprons/'.$stand->getId().'/edit')}}">
                                 <i class="mdi mdi-pencil-circle"></i> Edit
                             </a>
                         @endcan
                         @can('access-content', 'aprons.delete')
-                            {{Form::open(['url'=>['admin/stands', $stand->getId()], 'method'=>'delete'])}}
+                            {{Form::open(['url'=>['admin/aprons', $stand->getId()], 'method'=>'delete'])}}
                             <button class="dropdown-item delete_item"><i class="mdi mdi-trash-can"></i> Delete</button>
                             {{Form::close()}}
                         @endcan

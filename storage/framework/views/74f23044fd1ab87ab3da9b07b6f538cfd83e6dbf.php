@@ -1,5 +1,5 @@
 <?php $__env->startSection('title'); ?>
-    Raports
+    Reports
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('toolbar'); ?>
@@ -24,13 +24,19 @@
         <tbody>
         <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr class="odd gradeX">
-                <td><?= date('d-m-Y h:i', strtotime( $item['start'])) ?> </td>
+                <td><?= date('d-m-Y h:i', strtotime($item['start'])) ?> </td>
                 <td><?= $item['lat']?></td>
                 <td><?= $item['lng']?></td>
-                <td> in progr </td>
-                <td> in progr</td>
-                <td><?= date_diff(date_create($item['stop']),date_create($item['start']) )->format('%i') ?></td>
-
+                <td>
+                    <? if($item['name'] ):?>
+                    <a target="_blank" href="<?php echo e(url('admin/stands/'.$item['id'].'/edit' )); ?>"><?= $item['name']?></a>
+                    <? endif; ?>
+                </td>
+                <td> in progrress </td>
+                <td><?=
+                  ( strtotime($item['stop'])- strtotime($item['start'])) / 60   ?>
+                     min
+                </td>
 
 
             </tr>
