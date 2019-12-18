@@ -84,26 +84,8 @@ class User implements Authenticatable
      */
     private $role;
 
-    /**
-     * @return Raport
-     */
-    public function getRaport():Raport
-    {
-        return $this->raport;
-    }
-
-    /**
-     * @param mixed $raport
-     * @return User
-     */
-    public function setRaport($raport)
-    {
-        $this->raport = $raport;
-        return $this;
-    }
 
 
-    private $raport;
 
     /**
      * Get id

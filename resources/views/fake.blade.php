@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title></title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
 
 
 </head>
 <body>
 <div class="container-scroller">
 
-<div id="map" style="width:100%;height: 100vh;">
+    <div id="map" style="width:100%;height: 100vh;">
 
-</div>
+    </div>
 
 
 </div>
@@ -35,26 +35,25 @@
                     lat: 50.6441194, lng: 5.4464222
                 },
             zoom: 14,
-            mapTypeId:google.maps.MapTypeId.SATELLITE
+            mapTypeId: google.maps.MapTypeId.SATELLITE
         });
 
 
     let stands = JSON.parse(<?php echo json_encode($stands) ?>);
 
-    stands.forEach(item=>{
-        let point =   new google.maps.Marker({
-            position: {lat:parseFloat(item.lat),lng:parseFloat(item.lng)},
+    stands.forEach(item => {
+        let point = new google.maps.Marker({
+            position: {lat: parseFloat(item.lat), lng: parseFloat(item.lng)},
             map: map,
-            title: item.title + '-'  + item.id,
-            item:item
+            title: item.title + '-' + item.id,
+            item: item
         });
 
-        google.maps.event.addListener(point, 'click', function ()
-        {
+        google.maps.event.addListener(point, 'click', function () {
             console.log(item);
             alert(JSON.stringify(item, null, 4))
         });
-    })
+    });
 
     var flightPlanCoordinates = [
         {lat: 37.772, lng: -122.214},
@@ -70,18 +69,15 @@
         strokeWeight: 2
     });
 
-    flightPath.setMap(map)
+    flightPath.setMap(map);
 
 
-    google.maps.event.addListener(map, 'click', function( event ){
-        console.log( event.latLng.lat() + "," +event.latLng.lng() );
+    google.maps.event.addListener(map, 'click', function (event) {
+        console.log(event.latLng.lat() + "," + event.latLng.lng());
     });
 
 
-
 </script>
-
-
 
 
 </body>

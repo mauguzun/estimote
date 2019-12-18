@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Entity\Apron;
 use App\Entity\Country;
+use App\Entity\Device;
 use App\Entity\Raport;
-use App\Entity\Repository\StandRepository;
 use App\Entity\Stand;
 use App\Services\InfoService;
 use App\Services\UserService;
@@ -14,10 +13,10 @@ use Illuminate\Http\Request;
 use Sorskod\Larasponse\Larasponse;
 
 
-class ApronsController extends BaseController
+class DevicesController extends BaseController
 {
     private $infoService;
-    private $redirect = 'admin/aprons';
+    private $redirect = 'admin/devices';
 
     public function __construct(Larasponse $fractal, InfoService $infoService)
     {
@@ -28,22 +27,22 @@ class ApronsController extends BaseController
     public function index()
     {
 
-        return view('admin.aprons.index', [
+        return view('admin.devices.index', [
             'stands' => $this->getRepository()->findAll()
         ]);
     }
 
     /**
-     * @return \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository|StandRepository
+     * @return \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository|Device
      */
     protected function getRepository()
     {
-        return \EntityManager::getRepository(Apron::class);
+        return \EntityManager::getRepository(Device::class);
     }
 
     public function create()
     {
-        return view('admin.aprons.form', ['stand' => null]);
+        return view('admin.devices.form', ['stand' => null]);
     }
 
     public function edit($id)
@@ -52,7 +51,7 @@ class ApronsController extends BaseController
         if ($id && (!$item = $this->getRepository()->find($id))) {
             throw new EntityNotFoundException(sprintf('User with id %s not found', $id));
         }
-        return view('admin.aprons.form', ['stand' => $item]);
+        return view('admin.devices.form', ['stand' => $item]);
     }
 
 
@@ -63,10 +62,11 @@ class ApronsController extends BaseController
             throw new EntityNotFoundException(sprintf('User with id %s not found', $id));
         }
 
-        $this->validate($request, $this->getValidationRules($id)['create']);
+        $this->validate($request, $this->getValidationRules($id)['edit']);
         $aircraft->hydrate($request->all());
-        \Session::flash('success', 'Aircraft was successfully updated');
+        \Session::flash('success', 'Device was successfully updated');
         \EntityManager::flush($aircraft);
+
         return redirect($this->redirect);
     }
 
@@ -75,7 +75,12 @@ class ApronsController extends BaseController
 
         return [
             'create' => [
-                'title' => 'required|min:1',
+                'device_identifier' => 'required|min:4',
+                'api_id' => 'required|min:4',
+
+            ],
+            'edit' => [
+                'api_id' => 'required|min:4',
 
             ]
         ];
@@ -89,17 +94,26 @@ class ApronsController extends BaseController
     public function store(Request $request)
     {
 
+
         $this->validate($request, $this->getValidationRules()['create']);
 
-        $item = new Apron();
+        $item = new Device();
+
         $item->hydrate($request->all());
 
 
-
-
-        \Session::flash('success', 'Apron was successfully created');
         \EntityManager::persist($item);
-        \EntityManager::flush();
+
+        $metadata = \EntityManager::getClassMetaData(get_class($item));
+        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+
+        try {
+            \EntityManager::flush();
+            \Session::flash('success', 'Device was successfully created');
+        } catch (\Exception $e) {
+            \Session::flash('danger', $e->getMessage());
+        }
+
 
         return redirect($this->redirect);
     }
@@ -110,13 +124,14 @@ class ApronsController extends BaseController
 
         $item = $this->getRepository()->find($id);
 
-        if (!$item ) {
-           // throw new EntityNotFoundException(sprintf('Apron with id %s not found', $id));
+        if (!$item) {
+            // throw new EntityNotFoundException(sprintf('Apron with id %s not found', $id));
             \Session::flash('danger', 'Item not exist');
-        }
-        else if (\EntityManager::getRepository(Stand::class)->findByApron($item)) {
-            \Session::flash('danger', 'Pls first delete all stands based with apron ');
-            return redirect()->back();
+        } else {
+            if (\EntityManager::getRepository(Stand::class)->findByApron($item)) {
+                \Session::flash('danger', 'Pls first delete all stands based with apron ');
+                return redirect()->back();
+            }
         }
 
         \EntityManager::remove($item);

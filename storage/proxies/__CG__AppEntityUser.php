@@ -64,10 +64,10 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'name', '' . "\0" . 'App\\Entity\\User' . "\0" . 'lastname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'rememberToken', '' . "\0" . 'App\\Entity\\User' . "\0" . 'passwordResetToken', '' . "\0" . 'App\\Entity\\User' . "\0" . 'role', '' . "\0" . 'App\\Entity\\User' . "\0" . 'raport'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'name', '' . "\0" . 'App\\Entity\\User' . "\0" . 'lastname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'rememberToken', '' . "\0" . 'App\\Entity\\User' . "\0" . 'passwordResetToken', '' . "\0" . 'App\\Entity\\User' . "\0" . 'role'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'name', '' . "\0" . 'App\\Entity\\User' . "\0" . 'lastname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'rememberToken', '' . "\0" . 'App\\Entity\\User' . "\0" . 'passwordResetToken', '' . "\0" . 'App\\Entity\\User' . "\0" . 'role', '' . "\0" . 'App\\Entity\\User' . "\0" . 'raport'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'name', '' . "\0" . 'App\\Entity\\User' . "\0" . 'lastname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'rememberToken', '' . "\0" . 'App\\Entity\\User' . "\0" . 'passwordResetToken', '' . "\0" . 'App\\Entity\\User' . "\0" . 'role'];
     }
 
     /**
@@ -173,28 +173,6 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     }
 
     
-    /**
-     * {@inheritDoc}
-     */
-    public function getRaport(): \App\Entity\Raport
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRaport', []);
-
-        return parent::getRaport();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setRaport($raport)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRaport', [$raport]);
-
-        return parent::setRaport($raport);
-    }
-
     /**
      * {@inheritDoc}
      */

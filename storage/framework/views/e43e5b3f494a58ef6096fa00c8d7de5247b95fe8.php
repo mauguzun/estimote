@@ -17,6 +17,21 @@
                 </a>
             </li>
         <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('access-content', 'device.view')): ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo e(url('admin/devices/')); ?>">
+                    <i class="menu-icon typcn typcn-document-text"></i>
+                    <span class="menu-title">Devices</span>
+                </a>
+            </li>
+        <?php endif; ?>  <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('access-content', 'userdevice.view')): ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo e(url('admin/userdevice/')); ?>">
+                    <i class="menu-icon typcn typcn-document-text"></i>
+                    <span class="menu-title">Pick up / Drop off device </span>
+                </a>
+            </li>
+        <?php endif; ?>
 
         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('access-content', 'apron.view')): ?>
             <li class="nav-item">

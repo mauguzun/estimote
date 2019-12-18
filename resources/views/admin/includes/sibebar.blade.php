@@ -17,6 +17,21 @@
                 </a>
             </li>
         @endcan
+        @can('access-content', 'device.view')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('admin/devices/') }}">
+                    <i class="menu-icon typcn typcn-document-text"></i>
+                    <span class="menu-title">Devices</span>
+                </a>
+            </li>
+        @endcan  @can('access-content', 'userdevice.view')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('admin/userdevice/') }}">
+                    <i class="menu-icon typcn typcn-document-text"></i>
+                    <span class="menu-title">Pick up / Drop off device </span>
+                </a>
+            </li>
+        @endcan
 
         @can('access-content', 'apron.view')
             <li class="nav-item">

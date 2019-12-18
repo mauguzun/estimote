@@ -5,8 +5,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\Hydratable;
 use App\Entity\Raport;
-use App\Entity\User;
 use App\Entity\Device;
+use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -17,9 +17,9 @@ use phpDocumentor\Reflection\Types\This;
 /**
  * Aircraft
  * @ORM\Entity
- * @ORM\Table(name="aircrafts")
+ * @ORM\Table(name="user_device")
  */
-class Aircraft
+class UserDevice
 {
     use Hydratable, Notifiable;
     /**
@@ -32,22 +32,6 @@ class Aircraft
     private $id;
 
     /**
-     * @ORM\Column(name="added",type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP" )
-     */
-    private $added ;
-
-    /**
-     * @ORM\Column(name="aircraft",type="string", nullable=false )
-     */
-private $aircraft;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user_id" ,referencedColumnName="id")
-     **/
-    private  $user;
-
-    /**
      * @return int
      */
     public function getId(): int
@@ -55,43 +39,6 @@ private $aircraft;
         return $this->id;
     }
 
-
-
-    /**
-     * @return mixed
-     */
-    public function getAdded()
-    {
-        return $this->added;
-    }
-
-    /**
-     * @param mixed $added
-     * @return Aircraft
-     */
-    public function setAdded($added)
-    {
-        $this->added = $added;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAircraft()
-    {
-        return $this->aircraft;
-    }
-
-    /**
-     * @param mixed $aircraft
-     * @return Aircraft
-     */
-    public function setAircraft($aircraft)
-    {
-        $this->aircraft = $aircraft;
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -103,7 +50,7 @@ private $aircraft;
 
     /**
      * @param mixed $user
-     * @return Aircraft
+     * @return UserDevice
      */
     public function setUser($user)
     {
@@ -121,18 +68,68 @@ private $aircraft;
 
     /**
      * @param mixed $device
-     * @return Aircraft
+     * @return UserDevice
      */
     public function setDevice($device)
     {
         $this->device = $device;
         return $this;
     }
+
     /**
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id" ,referencedColumnName="id")
+     **/
+    private  $user;
+
+    /**
+     * @return mixed
+     */
+    public function getStart()
+    {
+        return $this->start;
+    }
+
+    /**
+     * @param mixed $start
+     * @return UserDevice
+     */
+    public function setStart($start)
+    {
+        $this->start = $start;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStop()
+    {
+        return $this->stop;
+    }
+
+    /**
+     * @param mixed $stop
+     * @return UserDevice
+     */
+    public function setStop($stop)
+    {
+        $this->stop = $stop;
+        return $this;
+    }
+     /**
      * @ORM\ManyToOne(targetEntity="Device")
      * @ORM\JoinColumn(name="device_id" ,referencedColumnName="device_identifier")
      **/
     private  $device;
 
 
+    /**
+     * @ORM\Column(name="start",type="datetime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP" )
+     */
+    private $start ;
+    /**
+     * @ORM\Column(name="stop",type="datetime" )
+     */
+    private  $stop;
 }

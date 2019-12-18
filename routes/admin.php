@@ -49,6 +49,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], f
             ['controller' => 'AircraftsController', 'prefix' => 'aircrafts', 'accesPrefix' => 'aircraft.'],
             ['controller' => 'StatusesController', 'prefix' => 'statuses', 'accesPrefix' => 'status.'],
             ['controller' => 'ReportsController', 'prefix' => 'reports', 'accesPrefix' => 'report.'],
+            ['controller' => 'DevicesController', 'prefix' => 'devices', 'accesPrefix' => 'device.'],
+            ['controller' => 'UserDeviceController', 'prefix' => 'userdevice', 'accesPrefix' => 'userdevice.'],
         ];
 
         foreach ($routes as $oneRoute) {

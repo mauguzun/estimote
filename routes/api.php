@@ -18,4 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::apiResource('/beacon', 'Api\BeaconController');
+//Route::apiResource('/beacon', 'Api\BeaconController');
+
+
+Route::post('/beacon',
+    ['uses' => 'Api\BeaconController@store']);
+Route::get('/beacon',
+    ['uses' => 'Api\BeaconController@index']);

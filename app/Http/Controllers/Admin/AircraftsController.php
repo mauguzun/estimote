@@ -31,6 +31,8 @@ class AircraftsController extends BaseController
 
     public function index()
     {
+        // 1 check if exist device in user_device ?
+        $userDevice =
 
         return view('admin.aircrafts.index', [
             'aircrafts' => $this->getRepository()->findAll()

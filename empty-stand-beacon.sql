@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 10/12/2019 18:00:46
+ Date: 11/12/2019 17:33:45
 */
 
 SET NAMES utf8mb4;
@@ -51,7 +51,7 @@ CREATE TABLE `beacon`  (
   `prec` double NULL DEFAULT NULL,
   `diff` double NULL DEFAULT NULL,
   `sats` double NULL DEFAULT NULL,
-  `speed` double NULL DEFAULT NULL,
+  `speed` decimal(10, 0) NULL DEFAULT NULL,
   `added` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 181 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;

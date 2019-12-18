@@ -42,6 +42,170 @@ class Report
      */
     private $long;
 
+    /**
+     * @return string
+     */
+    public function getDeviceIdentifier(): string
+    {
+        return $this->deviceIdentifier;
+    }
+
+    /**
+     * @param string $deviceIdentifier
+     * @return Report
+     */
+    public function setDeviceIdentifier(string $deviceIdentifier): Report
+    {
+        $this->deviceIdentifier = $deviceIdentifier;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return Report
+     */
+    public function setId(int $id): Report
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * @param mixed $lat
+     * @return Report
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLong()
+    {
+        return $this->long;
+    }
+
+    /**
+     * @param mixed $long
+     * @return Report
+     */
+    public function setLong($long)
+    {
+        $this->long = $long;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStand()
+    {
+        return $this->stand;
+    }
+
+    /**
+     * @param mixed $stand
+     * @return Report
+     */
+    public function setStand($stand)
+    {
+        $this->stand = $stand;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTs()
+    {
+        return $this->ts;
+    }
+
+    /**
+     * @param mixed $ts
+     * @return Report
+     */
+    public function setTs($ts)
+    {
+        $this->ts = $ts;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAircraft()
+    {
+        return $this->aircraft;
+    }
+
+    /**
+     * @param mixed $aircraft
+     * @return Report
+     */
+    public function setAircraft($aircraft)
+    {
+        $this->aircraft = $aircraft;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStamp()
+    {
+        return $this->stamp;
+    }
+
+    /**
+     * @param mixed $stamp
+     * @return Report
+     */
+    public function setStamp($stamp)
+    {
+        $this->stamp = $stamp;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLeadTime()
+    {
+        return $this->leadTime;
+    }
+
+    /**
+     * @param mixed $leadTime
+     * @return Report
+     */
+    public function setLeadTime($leadTime)
+    {
+        $this->leadTime = $leadTime;
+        return $this;
+    }
+
+
+
 
     /**
      * @ORM\ManyToOne(targetEntity="Stand")

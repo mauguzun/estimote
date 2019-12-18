@@ -39,11 +39,16 @@ class AuthController extends Controller
         $credentials = $request->only(['email', 'password']);
 
 
+
         /** @var User $user */
-        if ($user = \EntityManager::getRepository(User::class)->findOneBy(['email' => $credentials['email']])) {
+        if ($user = \EntityManager::getRepository(User::class)
+            ->findOneBy(['email' => $credentials['email']])) {
             if (!$user->isAdmin() && !$user->isAgent()) {
+
+
                 return \Redirect::route('admin::index');
             }
+
         }
 
         if (\Auth::guard('admin')->attempt($credentials)) {

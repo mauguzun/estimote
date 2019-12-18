@@ -18,6 +18,7 @@ class Authenticate extends Middleware
      */
     public function handle($request, Closure $next, ...$guards)
     {
+
         $guest = true;
 
         foreach ($guards as $guardElem) {

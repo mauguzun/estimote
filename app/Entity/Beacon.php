@@ -236,6 +236,83 @@ class Beacon
      */
     private $added ;
 
+
+
+    /**
+     * @return string
+     */
+    public function getAppId(): string
+    {
+        return $this->appId;
+    }
+
+    /**
+     * @param string $appId
+     * @return Beacon
+     */
+    public function setAppId(string $appId): Beacon
+    {
+        $this->appId = $appId;
+        return $this;
+    }
+
+    /**
+     * @ORM\Column(name="enqueued_at",type="datetime" )
+     */
+    private $enqueuedAt;
+
+    /**
+     * @return mixed
+     */
+    public function getEnqueuedAt()
+    {
+        return $this->enqueuedAt;
+    }
+
+    /**
+     * @param mixed $enqueuedAt
+     * @return Beacon
+     */
+    public function setEnqueuedAt($enqueuedAt)
+    {
+        $this->enqueuedAt = $enqueuedAt;
+        return $this;
+    }
+
+    /**
+     * @var string
+     * @ORM\Column(type="string" , name="device_identifier" , nullable=false  )
+     */
+    private $deviceIdentifier;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string" , name="app_id" , nullable=true  )
+     */
+    private $appId;
+
+    /**
+     * @return string
+     */
+    public function getDeviceIdentifier(): string
+    {
+        return $this->deviceIdentifier;
+    }
+
+    /**
+     * @param string $deviceIdentifier
+     * @return Beacon
+     */
+    public function setDeviceIdentifier(string $deviceIdentifier): Beacon
+    {
+        $this->deviceIdentifier = $deviceIdentifier;
+        return $this;
+    }
+
+
+
+    /**
+
     /**
      * @return mixed
      */
