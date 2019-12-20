@@ -10,6 +10,7 @@ use App\Entity\Repository\BeaconRepository;
 use App\Entity\Stand;
 use App\Services\InfoService;
 use App\Services\UserService;
+use DoctrineProxies\__CG__\App\Entity\Aircraft;
 use Illuminate\Http\Request;
 use Sorskod\Larasponse\Larasponse;
 
@@ -28,7 +29,8 @@ class ReportsController extends BaseController
     //start stop ts
     public function index()
     {
-        return view('admin.reports.form', ['ts' => ['1574356634000' => '1574356634000']]);
+        return view('admin.reports.form',
+            ['ts' => ['f015bb8c5dcc5351bbd5c16e90196332' => 'f015bb8c5dcc5351bbd5c16e90196332']]);
     }
 
 
@@ -40,14 +42,16 @@ class ReportsController extends BaseController
             $start = new \DateTime($_GET['start']);
 
 
-            $reportRows = $this->getRepository()->reportQuery($start, $stop, (int)$_GET['ts']);
+
+            $reportRows = $this->getRepository()->reportQuery($start, $stop, $_GET['ts']);
 
 
-            $step =  $this->getRepository()->steps($start, $stop, (int)$_GET['ts']);
+            $airRepo = \EntityManager::getRepository(Aircraft::class);
 
 
 
-         /*   dd($steps);*/
+            $step = $this->getRepository()->steps($start, $stop, $_GET['ts']);
+
 
             $stands = \EntityManager::getRepository(Stand::class)->findAll();
             $data = [];

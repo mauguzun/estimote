@@ -1,6 +1,5 @@
 <?php $__env->startSection('title'); ?>
-    <?php echo e($stand ? "Manage device" : "New device"); ?>
-
+    Pick up Device
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -9,34 +8,24 @@
             <?php echo $__env->make('admin.includes._form_errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <?php echo $__env->make('admin.includes._form_response_messages', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <?php echo e(Form::open([
-                    'url'	=> $stand ? 	['admin/devices',$stand->getId()]:['admin/devices'],
+                    'url'	=> ['admin/userdevice'],
                     'method'	=>  	$stand ? 'put' : 'post',
                 ])); ?>
 
-            <div class="form-group">
-                <?php echo e(Form::label('device_identifier', 'Device identifier')); ?>
 
-                <?php echo e(Form::text('device_identifier', $stand ? $stand->getId() : '', ["class" => "form-control"])); ?>
 
-            </div>
-            <div class="form-group">
-                <?php echo e(Form::label('api_id', 'Api')); ?>
-
-                <?php echo e(Form::text('api_id', $stand ? $stand->getApiId() : '', ["class" => "form-control"])); ?>
-
-            </div>
-            <div class="form-group">
-                <?php echo e(Form::label('description', 'Description')); ?>
-
-                <?php echo e(Form::text('description', $stand ? $stand->getDescription() : '', ["class" => "form-control"])); ?>
-
+            <div class="form-group row">
+                <label for="exampleInputPassword2"
+                       class="col-sm-3 col-form-label">   <?php echo e(Form::label('apron', 'Device')); ?></label>
+                <div class="col-sm-9">
+                    <?php echo e(Form::select('device_identifier',$devices ,  '',
+                            ['class' => 'form-control selectpicker' ,
+                            'required'=>'required']
+                        )); ?></div>
             </div>
 
-
-
-
             <div class="form-group">
-                <a href="<?php echo e(url('admin/stands')); ?>" class="btn btn-default">Cancel</a>
+                <a href="<?php echo e(url('admin/userdevice')); ?>" class="btn btn-default">Cancel</a>
                 <button type="SUBMIT" class="btn btn-success">Submit</button>
             </div>
             <?php echo e(Form::close()); ?>

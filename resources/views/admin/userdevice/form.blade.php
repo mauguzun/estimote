@@ -1,7 +1,7 @@
 @extends('admin.base_layout')
 
 @section('title')
-    {{ $stand ? "Manage device" : "New device" }}
+    Pick up Device
 @endsection
 
 @section('content')
@@ -10,28 +10,25 @@
             @include('admin.includes._form_errors')
             @include('admin.includes._form_response_messages')
             {{ Form::open([
-                    'url'	=> $stand ? 	['admin/devices',$stand->getId()]:['admin/devices'],
+                    'url'	=> ['admin/userdevice'],
                     'method'	=>  	$stand ? 'put' : 'post',
                 ])
             }}
-            <div class="form-group">
-                {{ Form::label('device_identifier', 'Device identifier') }}
-                {{ Form::text('device_identifier', $stand ? $stand->getId() : '', ["class" => "form-control"]) }}
+
+
+            <div class="form-group row">
+                <label for="exampleInputPassword2"
+                       class="col-sm-3 col-form-label">   {{ Form::label('apron', 'Device') }}</label>
+                <div class="col-sm-9">
+                    {{ Form::select('device_identifier',$devices ,  '',
+                            ['class' => 'form-control selectpicker' ,
+                            'required'=>'required']
+                        )
+                    }}</div>
             </div>
-            <div class="form-group">
-                {{ Form::label('api_id', 'Api') }}
-                {{ Form::text('api_id', $stand ? $stand->getApiId() : '', ["class" => "form-control"]) }}
-            </div>
-            <div class="form-group">
-                {{ Form::label('description', 'Description') }}
-                {{ Form::text('description', $stand ? $stand->getDescription() : '', ["class" => "form-control"]) }}
-            </div>
-
-
-
 
             <div class="form-group">
-                <a href="{{ url('admin/stands') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ url('admin/userdevice') }}" class="btn btn-default">Cancel</a>
                 <button type="SUBMIT" class="btn btn-success">Submit</button>
             </div>
             {{ Form::close() }}

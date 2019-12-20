@@ -32,7 +32,7 @@ class BeaconController extends BaseController
 
 
         foreach ($devices as $dev) {
-            for ($i = 1; $i < 3; $i++) {
+            for ($i = 1; $i < 4; $i++) {
 
                 $response = $this->apiRequest($dev->getApiId(), $i);
 

@@ -129,7 +129,7 @@ class UserDevice
      */
     private $start ;
     /**
-     * @ORM\Column(name="stop",type="datetime" )
+     * @ORM\Column(name="stop",type="datetime",nullable=true)
      */
     private  $stop;
 }

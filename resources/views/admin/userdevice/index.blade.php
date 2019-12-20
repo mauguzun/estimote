@@ -6,7 +6,17 @@
 
 @section('toolbar')
     <div class="sort-wrapper">
-        <a href="{{ url('/admin/userdevice/create') }}" class="btn btn-primary toolbar-item">New</a>
+        @if($in_use )
+
+            {{Form::open(['url'=>['admin/userdevice', $in_use->getId()], 'method'=>'delete'])}}
+            <button class="btn btn-danger toolbar-item">
+
+                Drop <?= $in_use->getDevice()->getId() ?></button>
+            {{Form::close()}}
+
+        @else
+            <a href="{{ url('/admin/userdevice/create') }}" class="btn btn-primary toolbar-item">Pick device</a>
+        @endif
     </div>
 @endsection
 
@@ -18,23 +28,25 @@
         <tr>
             <th>Device Id</th>
 
-            <th>From</th>
-            <th>Till</th>
+            <th>Start</th>
+            <th>Stop</th>
 
         </tr>
         </thead>
         <tbody>
         @foreach($stands  as $stand)
             <tr class="odd gradeX">
-                <td>{{ $stand->getDevice() }}</td>
+                <td><a href="#"><?= $stand->getDevice()->getId()?></a></td>
+                <td><?= $stand->getStart()->format('Y-m-d H:i') ?></td>
+                <td><?= $stand->getStop() ? $stand->getStop()->format('Y-m-d H:i') : null ?></td>
 
-                <td>{{ $stand->getStart() }}</td>
-                <td>{{ $stand->getStop() }}</td>
 
             </tr>
         @endforeach
         </tbody>
     </table>
+
+
 @endsection
 
 @section('scripts')

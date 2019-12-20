@@ -1,7 +1,7 @@
 @extends ('admin.base_layout')
 
 @section('title')
-    Aircrafts
+    Aircraft
 @endsection
 
 @section('toolbar')
@@ -16,42 +16,23 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Ac Reg</th>
-            <th>Manage</th>
-
+            <th>Date</th>
+            <th>Aircraft</th>
+            <th>Stand <small>Only debug</small> </th>
+            <th>Device</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($aircrafts as $aircraft)
+        @foreach($aircrafts  as $stand)
             <tr class="odd gradeX">
-                <td>{{ $aircraft->getAcReg() }}</td>
-                <td width="25%">
-                    <button class="btn btn-warning icon-btn dropdown-toggle"
-                            type="button" id="dropdownMenuIconButton1"
-                            data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                    </button>
-                    <div class="dropdown-menu"
-                         aria-labelledby="dropdownMenuIconButton1"
-                         x-placement="bottom-start"
-                         style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
+
+                <td><?= $stand->getAdded()->format('Y-m-d H:i') ?></td>
+                <td><?= $stand->getAircraft() ?></td>
+                <td><?= $stand->getStand()->getName() ?></td>
+                <td><a href="#"><?= $stand->getDevice()->getId()?></a></td>
 
 
-                        @can('access-content', 'aircraft.edit')
-                            <a class="dropdown-item"
-                               href="{{ url('admin/aircrafts/'.$aircraft->getId().'/edit')}}">
-                                <i class="mdi mdi-pencil-circle"></i> Edit
-                            </a>
-                        @endcan
 
-                        @can('access-content', 'aircraft.delete')
-                            {{Form::open(['url'=>['admin/aircrafts', $aircraft->getId()], 'method'=>'delete'])}}
-                            <button class="dropdown-item delete_item"><i class="mdi mdi-trash-can"></i> Delete</button>
-                            {{Form::close()}}
-                        @endcan
-
-                    </div>
-                </td>
             </tr>
         @endforeach
         </tbody>

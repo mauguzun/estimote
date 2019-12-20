@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Entity\Aircraft;
 use App\Entity\Country;
-use App\Entity\Raport;
+use App\Entity\Device;
 use App\Entity\Repository\StandRepository;
 use App\Services\InfoService;
 use App\Services\UserService;
@@ -27,16 +27,31 @@ class AircraftsController extends BaseController
     {
         parent::__construct($fractal);
         $this->infoService = new InfoService();
+
+
+
+
+    }
+
+    /**
+     * @return object|null
+     */
+    private  function device(){
+        return \EntityManager::getRepository(Device::class) ->findOneBy(['user' => \Auth::user()]);
     }
 
     public function index()
     {
         // 1 check if exist device in user_device ?
-        $userDevice =
 
-        return view('admin.aircrafts.index', [
-            'aircrafts' => $this->getRepository()->findAll()
-        ]);
+        if($device = $this->device()){
+            return view('admin.aircrafts.index', [
+                'aircrafts' =>$this->getRepository()->findBy(['user'=>\Auth::user()])
+            ]);
+        }
+
+
+
     }
 
     /**
@@ -49,7 +64,15 @@ class AircraftsController extends BaseController
 
     public function create()
     {
-        return view('admin.aircrafts.form', ['aircraft' => null]);
+        if($device = $this->device()){
+            return view('admin.aircrafts.form', [
+                'stands' =>$this->infoService->get(InfoService::DATA_TYPE_FORM_STANDS),
+            ]);
+        }
+
+        \Session::flash('danger', 'First plspick up device ');
+        return redirect('admin/userdevice/');
+
     }
 
     public function edit($id)
@@ -82,8 +105,8 @@ class AircraftsController extends BaseController
 
         return [
             'create' => [
-                'acReg' =>
-                    'required|min:3|unique:App\Entity\Aircraft,acReg,' . $id,
+                'aircraft' =>
+                    'required|min:2' . $id,
             ]
         ];
     }
@@ -95,6 +118,12 @@ class AircraftsController extends BaseController
 
         $aircraft = new Aircraft();
         $aircraft->hydrate($request->all());
+
+        $aircraft->setUser(\Auth::user());
+        $aircraft->setAdded(new \DateTime($request->get('added')));
+
+        $device = \EntityManager::getRepository(Device::class) ->findOneBy(['user' => \Auth::user()]);
+$aircraft->setDevice($device);
 
         \Session::flash('success', 'Aircraft was successfully created');
         \EntityManager::persist($aircraft);

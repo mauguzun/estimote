@@ -134,5 +134,29 @@ private $aircraft;
      **/
     private  $device;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Stand")
+     * @ORM\JoinColumn(name="stand_id" ,referencedColumnName="id")
+     **/
+    private  $stand;
+
+    /**
+     * @return mixed
+     */
+    public function getStand()
+    {
+        return $this->stand;
+    }
+
+    /**
+     * @param mixed $stand
+     * @return Aircraft
+     */
+    public function setStand($stand)
+    {
+        $this->stand = $stand;
+        return $this;
+    }
+
 
 }

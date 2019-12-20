@@ -10,12 +10,11 @@ namespace App\Services;
 
 
 use App\Entity\Aircraft;
+use App\Entity\Apron;
 use App\Entity\Device;
 use App\Entity\Stand;
-use App\Entity\Apron;
 use App\Entity\Status;
 use App\Entity\UserRole;
-use App\Http\Controllers\Admin\StandsController;
 
 class InfoService
 {
@@ -50,8 +49,9 @@ class InfoService
                 return $this->getArrayFromObject(Status::class, 'getId', 'getStatus');
             case static::DATA_TYPE_FORM_APRONS:
                 return $this->getArrayFromObject(Apron::class, 'getId', 'getTitle');
- case static::DATA_TYPE_FORM_APRONS:
-                return $this->getArrayFromObject(Device::class, 'getId', 'getId');
+            case static::DATA_TYPE_FORM_DEVICES:
+                return $this->getArrayFromObject(Device::class,
+                    'getId', 'getId',['user'=>null]);
 
 
         }
@@ -79,19 +79,27 @@ class InfoService
         return $years;
     }
 
+
     /**
      * @param string $className
      * @param string $valueGetterName
      * @param string $textGetterName
      * @return array
      */
-    function getArrayFromObject(string $className, string $valueGetterName, string $textGetterName): array
-    {
+    function getArrayFromObject(
+        string $className,
+        string $valueGetterName,
+        string $textGetterName,
+array  $filter =[]): array {
         $return = [];
 
-        foreach (\EntityManager::getRepository($className)->findAll() as $instance) {
+        foreach (\EntityManager::getRepository($className)->findBy($filter) as $instance) {
+
             $return[call_user_func([$instance, $valueGetterName])] = call_user_func([$instance, $textGetterName]);
         }
         return $return;
     }
+
+
+
 }

@@ -26,7 +26,7 @@
         <tbody>
         @foreach($items  as $item)
             <tr class="odd gradeX">
-                <td><?= date('d-m-Y h:i', strtotime($item['start'])) ?> </td>
+                <td><?= date('d-m-Y H:i', strtotime($item['start'])) ?> </td>
                 <td><?= $item['lat']?></td>
                 <td><?= $item['lng']?></td>
                 <td>
@@ -34,7 +34,8 @@
                     <a target="_blank" href="{{ url('admin/stands/'.$item['id'].'/edit' ) }}"><?= $item['name']?></a>
                     <? endif; ?>
                 </td>
-                <td> in progrress </td>
+                <td><?=   $item['air']  ?> / clicked at
+                    <?=  $item['added']->format(' H:i') ?>  </td>
                 <td><?=
                   ( strtotime($item['stop'])- strtotime($item['start'])) / 60   ?>
                      min
