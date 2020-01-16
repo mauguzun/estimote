@@ -6,6 +6,7 @@ use App\Entity\Country;
 use App\Entity\Device;
 use App\Entity\Raport;
 use App\Entity\Stand;
+use App\Entity\UserDevice;
 use App\Services\InfoService;
 use App\Services\UserService;
 use Doctrine\ORM\EntityNotFoundException;
@@ -76,11 +77,11 @@ class DevicesController extends BaseController
         return [
             'create' => [
                 'device_identifier' => 'required|min:4',
-                'api_id' => 'required|min:4',
+                'api_url' => 'required|min:4',
 
             ],
             'edit' => [
-                'api_id' => 'required|min:4',
+                'api_url' => 'required|min:4',
 
             ]
         ];
@@ -123,15 +124,24 @@ class DevicesController extends BaseController
 
 
         $item = $this->getRepository()->find($id);
+        $deviceRep =  \EntityManager::getRepository(UserDevice::class);
+
 
         if (!$item) {
             // throw new EntityNotFoundException(sprintf('Apron with id %s not found', $id));
             \Session::flash('danger', 'Item not exist');
         } else {
-            if (\EntityManager::getRepository(Stand::class)->findByApron($item)) {
-                \Session::flash('danger', 'Pls first delete all stands based with apron ');
-                return redirect()->back();
+
+            $devices = $deviceRep->findBy(['device'=>$item]);
+            foreach ($devices as $device){
+                \EntityManager::remove($device);
+
             }
+            \EntityManager::flush();
+
+            \EntityManager::flush();
+            \Session::flash('danger', 'This also removed all history with this device id !');
+
         }
 
         \EntityManager::remove($item);

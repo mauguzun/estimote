@@ -18,9 +18,9 @@
         <tr>
             <th>Device Id</th>
 
-            <th>Api Id</th>
+            <th>Api Url</th>
             <th>Description </th>
-            <th> 123</th>
+            <th> </th>
         </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@
             <tr class="odd gradeX">
                 <td>{{ $stand->getId() }}</td>
 
-                <td>{{ $stand->getApiId() }}</td>
+                <td>{{ $stand->getApiUrl() }}</td>
                 <td>{{ $stand->getDescription() }}</td>
                 <td width="25%">
                     <button class="btn btn-warning icon-btn dropdown-toggle"

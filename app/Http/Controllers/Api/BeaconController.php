@@ -34,7 +34,7 @@ class BeaconController extends BaseController
         foreach ($devices as $dev) {
             for ($i = 1; $i < 4; $i++) {
 
-                $response = $this->apiRequest($dev->getApiId(), $i);
+                $response = $this->apiRequest($dev->getApiUrl(), $i);
 
                 $saved = 0;
                 $total = 0;
@@ -72,11 +72,11 @@ class BeaconController extends BaseController
                             \EntityManager::persist($new);
                         }
                     }
-                    echo $saved.'/' .$dev->getApiId(). '/'.$deviceId."<br>";
+                    echo $saved.'/' .$dev->getApiUrl(). '/'.$deviceId."<br>";
 
                 }
                 $log = new  Log();
-                $log->setTotal($total)->setSaved($saved)->setApiId($dev->getApiId())->setDeviceIdentifier($deviceId);
+                $log->setTotal($total)->setSaved($saved)->setApiId($dev->getApiUrl())->setDeviceIdentifier($deviceId);
                 \EntityManager::persist($log);
                 \EntityManager::flush();
 
@@ -86,13 +86,13 @@ class BeaconController extends BaseController
     }
 
     /**
-     * @param string $appId
+     * @param string $apiUrl
      * @param int $pageNum
      * @return bool|string
      */
-    private function apiRequest(string $appId, $pageNum = 1)
+    private function apiRequest(string $apiUrl, $pageNum = 1)
     {
-        $ch = curl_init('https://cloud.estimote.com/v3/lte/device_events?app_id=' . $appId . '&page=' . $pageNum . '&type=position-change');
+        $ch = curl_init($apiUrl. '&page=' . $pageNum );
         $headers = array(
             'Content-Type:application/json',
             'Authorization: Basic ' . base64_encode("jean-marc-urbani-s-your-ow-mkr:5dbd07ab9494ec7e8bf30ee5db47151b")

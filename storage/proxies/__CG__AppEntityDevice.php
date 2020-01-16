@@ -64,10 +64,10 @@ class Device extends \App\Entity\Device implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'deviceIdentifier', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'apiId', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'description', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'user'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'deviceIdentifier', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'apiUrl', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'description', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'user'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'deviceIdentifier', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'apiId', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'description', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'user'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'deviceIdentifier', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'apiUrl', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'description', '' . "\0" . 'App\\Entity\\Device' . "\0" . 'user'];
     }
 
     /**
@@ -198,28 +198,6 @@ class Device extends \App\Entity\Device implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getApiId(): string
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getApiId', []);
-
-        return parent::getApiId();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setApiId(string $apiId): \App\Entity\Device
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setApiId', [$apiId]);
-
-        return parent::setApiId($apiId);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getDescription(): string
     {
 
@@ -237,6 +215,28 @@ class Device extends \App\Entity\Device implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescription', [$description]);
 
         return parent::setDescription($description);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getApiUrl(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getApiUrl', []);
+
+        return parent::getApiUrl();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setApiUrl(string $apiUrl): \App\Entity\Device
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setApiUrl', [$apiUrl]);
+
+        return parent::setApiUrl($apiUrl);
     }
 
     /**

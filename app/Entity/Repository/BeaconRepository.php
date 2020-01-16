@@ -23,34 +23,54 @@ class BeaconRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('dg');
 
-        $d = $this->createQueryBuilder('u')
+        $d=    $this->createQueryBuilder('u')
             ->select(
-                'MAX(u.enqueuedAt) AS stop,
-                MIN(u.enqueuedAt) as start, 
+                'MAX(u.added) AS stop,
+                MIN(u.added) as start, 
                 u.lat as lat,
                 u.long as lng,
                 s.name as name,
-                s.id as id ,
-                a.aircraft as air,
-                a.added as added 
+                s.id as id 
                 ')
-            ->where('u.speed = :speed')
-            ->setParameter('speed', 0)
-            ->andWhere('u.deviceIdentifier = :device_identifier')
-            ->setParameter('device_identifier', $deviceId)
-            ->andWhere('u.enqueuedAt < :stop')
-            ->andWhere('u.enqueuedAt > :start')
+            ->where('u.speed = 0')
+
+            ->andWhere('u.added < :stop')
+            ->andWhere('u.added > :start')
             ->setParameter('start', $start)
             ->setParameter('stop', $stop)
             ->leftJoin('App\Entity\Stand', 's',
                 \Doctrine\ORM\Query\Expr\Join::WITH, 'u.lat = s.latitude and u.long = s.longitude')
-            ->leftJoin('App\Entity\Aircraft', 'a',
-                \Doctrine\ORM\Query\Expr\Join::WITH, "u.deviceIdentifier = a.device
-                  ")
-            ->groupBy('a.aircraft,u.lat,u.long,s.name,s.id,a.added ')
-            ->having('added > MIN(u.enqueuedAt) and added < MAX(u.enqueuedAt)')
-            ->orderBy('a.added')
+            ->groupBy('u.lat,u.long,s.name,s.id')
             ->getQuery()->getResult();
+        return $d;
+// $d = $this->createQueryBuilder('u')
+//            ->select(
+//                'MAX(u.enqueuedAt) AS stop,
+//                MIN(u.enqueuedAt) as start,
+//                u.lat as lat,
+//                u.long as lng,
+//                s.name as name,
+//                s.id as id ,
+//                a.aircraft as air,
+//                a.added as added
+//                ')
+//            ->where('u.speed = :speed')
+//            ->setParameter('speed', 0)
+//            ->andWhere('u.deviceIdentifier = :device_identifier')
+//            ->setParameter('device_identifier', $deviceId)
+//            ->andWhere('u.enqueuedAt < :stop')
+//            ->andWhere('u.enqueuedAt > :start')
+//            ->setParameter('start', $start)
+//            ->setParameter('stop', $stop)
+//            ->leftJoin('App\Entity\Stand', 's',
+//                \Doctrine\ORM\Query\Expr\Join::WITH, 'u.lat = s.latitude and u.long = s.longitude')
+//            ->leftJoin('App\Entity\Aircraft', 'a',
+//                \Doctrine\ORM\Query\Expr\Join::WITH, "u.deviceIdentifier = a.device
+//                  ")
+//            ->groupBy('a.aircraft,u.lat,u.long,s.name,s.id,a.added ')
+//            ->having('added > MIN(u.enqueuedAt) and added < MAX(u.enqueuedAt)')
+//            ->orderBy('a.added')
+//            ->getQuery()->getResult();
 
         return $d;
     }

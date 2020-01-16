@@ -32,23 +32,6 @@ class Device
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getApiId(): string
-    {
-        return $this->apiId;
-    }
-
-    /**
-     * @param string $apiId
-     * @return Device
-     */
-    public function setApiId(string $apiId): Device
-    {
-        $this->apiId = $apiId;
-        return $this;
-    }
 
     /**
      * @return string
@@ -82,9 +65,27 @@ class Device
 
     /**
      * @var string
-     * @ORM\Column(type="string" , name="api_id" , nullable=true  )
+     * @ORM\Column(type="string" , name="api_url" , nullable=true  )
      */
-    private $apiId;
+    private $apiUrl;
+
+    /**
+     * @return string
+     */
+    public function getApiUrl(): string
+    {
+        return $this->apiUrl;
+    }
+
+    /**
+     * @param string $apiUrl
+     * @return Device
+     */
+    public function setApiUrl(string $apiUrl): Device
+    {
+        $this->apiUrl = $apiUrl;
+        return $this;
+    }
 
     /**
      * @var string

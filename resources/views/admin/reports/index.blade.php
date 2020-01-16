@@ -34,11 +34,10 @@
                     <a target="_blank" href="{{ url('admin/stands/'.$item['id'].'/edit' ) }}"><?= $item['name']?></a>
                     <? endif; ?>
                 </td>
-                <td><?=   $item['air']  ?> / clicked at
-                    <?=  $item['added']->format(' H:i') ?>  </td>
+                <td> I must setup lazy load for this </td>
                 <td><?=
                   ( strtotime($item['stop'])- strtotime($item['start'])) / 60   ?>
-                     min
+                min
                 </td>
 
 

@@ -32,11 +32,10 @@
                     <a target="_blank" href="<?php echo e(url('admin/stands/'.$item['id'].'/edit' )); ?>"><?= $item['name']?></a>
                     <? endif; ?>
                 </td>
-                <td><?=   $item['air']  ?> / clicked at
-                    <?=  $item['added']->format(' H:i') ?>  </td>
+                <td> I must setup lazy load for this </td>
                 <td><?=
                   ( strtotime($item['stop'])- strtotime($item['start'])) / 60   ?>
-                     min
+                min
                 </td>
 
 
@@ -59,4 +58,5 @@
 
     </script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('admin.base_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/vagrant/code/resources/views/admin/reports/index.blade.php ENDPATH**/ ?>

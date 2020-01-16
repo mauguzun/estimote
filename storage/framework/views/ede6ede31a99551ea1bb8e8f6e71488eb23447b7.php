@@ -16,9 +16,9 @@
         <tr>
             <th>Device Id</th>
 
-            <th>Api Id</th>
+            <th>Api Url</th>
             <th>Description </th>
-            <th> 123</th>
+            <th> </th>
         </tr>
         </thead>
         <tbody>
@@ -26,7 +26,7 @@
             <tr class="odd gradeX">
                 <td><?php echo e($stand->getId()); ?></td>
 
-                <td><?php echo e($stand->getApiId()); ?></td>
+                <td><?php echo e($stand->getApiUrl()); ?></td>
                 <td><?php echo e($stand->getDescription()); ?></td>
                 <td width="25%">
                     <button class="btn btn-warning icon-btn dropdown-toggle"
@@ -66,4 +66,5 @@
 
     </script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('admin.base_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/vagrant/code/resources/views/admin/devices/index.blade.php ENDPATH**/ ?>

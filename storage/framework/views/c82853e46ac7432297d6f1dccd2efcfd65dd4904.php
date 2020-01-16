@@ -23,9 +23,9 @@
             </div>
             <?php endif; ?>
             <div class="form-group">
-                <?php echo e(Form::label('api_id', 'Api')); ?>
+                <?php echo e(Form::label('api_url', 'Api Url ')); ?>
 
-                <?php echo e(Form::text('api_id', $stand ? $stand->getApiId() : '', ["class" => "form-control"])); ?>
+                <?php echo e(Form::text('api_url', $stand ? $stand->getApiUrl() : '', ["class" => "form-control"])); ?>
 
             </div>
             <div class="form-group">

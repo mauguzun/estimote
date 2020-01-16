@@ -22,8 +22,8 @@
             </div>
             @endif
             <div class="form-group">
-                {{ Form::label('api_id', 'Api') }}
-                {{ Form::text('api_id', $stand ? $stand->getApiId() : '', ["class" => "form-control"]) }}
+                {{ Form::label('api_url', 'Api Url ') }}
+                {{ Form::text('api_url', $stand ? $stand->getApiUrl() : '', ["class" => "form-control"]) }}
             </div>
             <div class="form-group">
                 {{ Form::label('description', 'Description') }}
